@@ -1,0 +1,395 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="nvgl">
+      <UniqueIdentifier>{b060748d-d5c2-4f67-a561-4bf04b907942}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nvvk">
+      <UniqueIdentifier>{b6da42cc-3a99-474a-af1d-06588f7df4d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nvh">
+      <UniqueIdentifier>{e766f634-35ae-4cd8-88bd-fd0a7482c237}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nvmath">
+      <UniqueIdentifier>{6792be0a-6c75-4606-80a7-591c1d697c0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="fileformats">
+      <UniqueIdentifier>{96413234-ed0f-48af-aa2b-9c2466dba05d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nvp">
+      <UniqueIdentifier>{0f485d5d-34af-4338-9aa1-54c7ee7e80a7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\fileformats\bmp.hpp">
+      <Filter>fileformats</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\fileformats\cadscenefile.h">
+      <Filter>fileformats</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\fileformats\cgltf.h">
+      <Filter>fileformats</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\fileformats\json.hpp">
+      <Filter>fileformats</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\fileformats\nv_dds.h">
+      <Filter>fileformats</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\fileformats\stb_image.h">
+      <Filter>fileformats</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\fileformats\stb_image_write.h">
+      <Filter>fileformats</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\fileformats\tiny_gltf.h">
+      <Filter>fileformats</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\fileformats\tiny_obj_loader.h">
+      <Filter>fileformats</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvmath\nvmath.h">
+      <Filter>nvmath</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvmath\nvmath_glsltypes.h">
+      <Filter>nvmath</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvmath\nvmath_hlsltypes.h">
+      <Filter>nvmath</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvmath\nvmath_types.h">
+      <Filter>nvmath</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvh\appwindowcamerainertia.hpp">
+      <Filter>nvh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvh\appwindowprofiler.hpp">
+      <Filter>nvh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvh\bitarray.hpp">
+      <Filter>nvh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvh\cameracontrol.hpp">
+      <Filter>nvh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvh\camerainertia.hpp">
+      <Filter>nvh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvh\cameramanipulator.hpp">
+      <Filter>nvh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvh\filemapping.hpp">
+      <Filter>nvh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvh\fileoperations.hpp">
+      <Filter>nvh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvh\geometry.hpp">
+      <Filter>nvh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvh\gltfscene.hpp">
+      <Filter>nvh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvh\inputparser.h">
+      <Filter>nvh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvh\misc.hpp">
+      <Filter>nvh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvh\nsightevents.h">
+      <Filter>nvh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvh\nvprint.hpp">
+      <Filter>nvh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvh\parametertools.hpp">
+      <Filter>nvh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvh\profiler.hpp">
+      <Filter>nvh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvh\radixsort.hpp">
+      <Filter>nvh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvh\shaderfilemanager.hpp">
+      <Filter>nvh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvh\timesampler.hpp">
+      <Filter>nvh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvh\trangeallocator.hpp">
+      <Filter>nvh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvvk\allocator_dedicated_vk.hpp">
+      <Filter>nvvk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvvk\allocator_dma_vk.hpp">
+      <Filter>nvvk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvvk\allocator_dma_vkgl.hpp">
+      <Filter>nvvk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvvk\allocator_vk.hpp">
+      <Filter>nvvk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvvk\allocator_vma_vk.hpp">
+      <Filter>nvvk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvvk\appbase_vkpp.hpp">
+      <Filter>nvvk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvvk\appwindowprofiler_vk.hpp">
+      <Filter>nvvk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvvk\buffers_vk.hpp">
+      <Filter>nvvk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvvk\commands_vk.hpp">
+      <Filter>nvvk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvvk\context_vk.hpp">
+      <Filter>nvvk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvvk\debug_util_vk.hpp">
+      <Filter>nvvk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvvk\descriptorsets_vk.hpp">
+      <Filter>nvvk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvvk\error_vk.hpp">
+      <Filter>nvvk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvvk\extensions_vk.hpp">
+      <Filter>nvvk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvvk\gizmos_vk.hpp">
+      <Filter>nvvk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvvk\images_vk.hpp">
+      <Filter>nvvk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvvk\memorymanagement_vk.hpp">
+      <Filter>nvvk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvvk\memorymanagement_vkgl.hpp">
+      <Filter>nvvk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvvk\pipeline_vk.hpp">
+      <Filter>nvvk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvvk\profiler_vk.hpp">
+      <Filter>nvvk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvvk\raytraceKHR_vk.hpp">
+      <Filter>nvvk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvvk\raytraceNV_vk.hpp">
+      <Filter>nvvk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvvk\renderpasses_vk.hpp">
+      <Filter>nvvk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvvk\samplers_vk.hpp">
+      <Filter>nvvk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvvk\shadermodulemanager_vk.hpp">
+      <Filter>nvvk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvvk\shaders_vk.hpp">
+      <Filter>nvvk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvvk\structs_vk.hpp">
+      <Filter>nvvk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvvk\swapchain_vk.hpp">
+      <Filter>nvvk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvgl\appwindowprofiler_gl.hpp">
+      <Filter>nvgl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvgl\base_gl.hpp">
+      <Filter>nvgl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvgl\contextwindow_gl.hpp">
+      <Filter>nvgl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvgl\error_gl.hpp">
+      <Filter>nvgl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvgl\extensions_gl.hpp">
+      <Filter>nvgl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvgl\glsltypes_gl.hpp">
+      <Filter>nvgl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvgl\profiler_gl.hpp">
+      <Filter>nvgl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvgl\programmanager_gl.hpp">
+      <Filter>nvgl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvpsystem.hpp">
+      <Filter>nvp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\nvvk_resources\nvpwindow.hpp">
+      <Filter>nvp</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="nvvk_lib.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\nvvk_resources\fileformats\cadscenefile.cpp">
+      <Filter>fileformats</Filter>
+    </ClCompile>
+    <ClCompile Include="..\nvvk_resources\fileformats\cgltf.cpp">
+      <Filter>fileformats</Filter>
+    </ClCompile>
+    <ClCompile Include="..\nvvk_resources\fileformats\nv_dds.cpp">
+      <Filter>fileformats</Filter>
+    </ClCompile>
+    <ClCompile Include="..\nvvk_resources\nvh\appwindowprofiler.cpp">
+      <Filter>nvh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\nvvk_resources\nvh\bitarray.cpp">
+      <Filter>nvh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\nvvk_resources\nvh\cameramanipulator.cpp">
+      <Filter>nvh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\nvvk_resources\nvh\filemapping.cpp">
+      <Filter>nvh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\nvvk_resources\nvh\gltfscene.cpp">
+      <Filter>nvh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\nvvk_resources\nvh\nvprint.cpp">
+      <Filter>nvh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\nvvk_resources\nvh\parametertools.cpp">
+      <Filter>nvh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\nvvk_resources\nvh\profiler.cpp">
+      <Filter>nvh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\nvvk_resources\nvh\shaderfilemanager.cpp">
+      <Filter>nvh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\nvvk_resources\nvvk\allocator_dma_vkgl.cpp">
+      <Filter>nvvk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\nvvk_resources\nvvk\appwindowprofiler_vk.cpp">
+      <Filter>nvvk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\nvvk_resources\nvvk\commands_vk.cpp">
+      <Filter>nvvk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\nvvk_resources\nvvk\context_vk.cpp">
+      <Filter>nvvk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\nvvk_resources\nvvk\debug_util_vk.cpp">
+      <Filter>nvvk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\nvvk_resources\nvvk\descriptorsets_vk.cpp">
+      <Filter>nvvk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\nvvk_resources\nvvk\error_vk.cpp">
+      <Filter>nvvk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\nvvk_resources\nvvk\extensions_vk.cpp">
+      <Filter>nvvk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\nvvk_resources\nvvk\gizmos_vk.cpp">
+      <Filter>nvvk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\nvvk_resources\nvvk\images_vk.cpp">
+      <Filter>nvvk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\nvvk_resources\nvvk\memorymanagement_vk.cpp">
+      <Filter>nvvk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\nvvk_resources\nvvk\memorymanagement_vkgl.cpp">
+      <Filter>nvvk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\nvvk_resources\nvvk\pipeline_vk.cpp">
+      <Filter>nvvk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\nvvk_resources\nvvk\profiler_vk.cpp">
+      <Filter>nvvk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\nvvk_resources\nvvk\renderpasses_vk.cpp">
+      <Filter>nvvk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\nvvk_resources\nvvk\samplers_vk.cpp">
+      <Filter>nvvk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\nvvk_resources\nvvk\shadermodulemanager_vk.cpp">
+      <Filter>nvvk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\nvvk_resources\nvvk\swapchain_vk.cpp">
+      <Filter>nvvk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\nvvk_resources\nvgl\appwindowprofiler_gl.cpp">
+      <Filter>nvgl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\nvvk_resources\nvgl\contextwindow_gl.cpp">
+      <Filter>nvgl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\nvvk_resources\nvgl\error_gl.cpp">
+      <Filter>nvgl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\nvvk_resources\nvgl\extensions_gl.cpp">
+      <Filter>nvgl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\nvvk_resources\nvgl\profiler_gl.cpp">
+      <Filter>nvgl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\nvvk_resources\nvgl\programmanager_gl.cpp">
+      <Filter>nvgl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\nvvk_resources\nvpsystem.cpp">
+      <Filter>nvp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\nvvk_resources\nvpsystem_win32.cpp">
+      <Filter>nvp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\nvvk_resources\nvpwindow.cpp">
+      <Filter>nvp</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\nvvk_resources\nvmath\nvmath.inl">
+      <Filter>nvmath</Filter>
+    </None>
+    <None Include="..\nvvk_resources\nvvk\extensions_vk.lua">
+      <Filter>nvvk</Filter>
+    </None>
+    <None Include="..\nvvk_resources\nvvk\structs_vk.lua">
+      <Filter>nvvk</Filter>
+    </None>
+    <None Include="..\nvvk_resources\nvgl\extensions_gl.lua">
+      <Filter>nvgl</Filter>
+    </None>
+  </ItemGroup>
+</Project>

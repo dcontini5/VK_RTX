@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{156F3E1D-5074-40B7-ACFA-30D2C5CF5F12}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>nvvklib</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(CSLib)\inc;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_LIB;WIN32;_WINDOWS;NOMINMAX;USEVULKANSDK;GLFW_INCLUDE_VULKAN;VK_ENABLE_BETA_EXTENSIONS;USEOPENGL;USEIMGUI;CSF_ZIP_SUPPORT=1;VULKAN_HPP_DISPATCH_LOADER_DYNAMIC=1;VK_USE_PLATFORM_WIN32_KHR;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>false</ConformanceMode>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>C:\VulkanSDK\1.2.141.2\Include;$(SolutionDir)glfw-3.3.2.bin.WIN64\include;$(SolutionDir)imgui;$(SolutionDir)nvvk_resources;$(SolutionDir)zlib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <LanguageStandard>stdcpp14</LanguageStandard>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <UseFullPaths>false</UseFullPaths>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\nvvk_resources\fileformats\bmp.hpp" />
+    <ClInclude Include="..\nvvk_resources\fileformats\cadscenefile.h" />
+    <ClInclude Include="..\nvvk_resources\fileformats\cgltf.h" />
+    <ClInclude Include="..\nvvk_resources\fileformats\json.hpp" />
+    <ClInclude Include="..\nvvk_resources\fileformats\nv_dds.h" />
+    <ClInclude Include="..\nvvk_resources\fileformats\stb_image.h" />
+    <ClInclude Include="..\nvvk_resources\fileformats\stb_image_write.h" />
+    <ClInclude Include="..\nvvk_resources\fileformats\tiny_gltf.h" />
+    <ClInclude Include="..\nvvk_resources\fileformats\tiny_obj_loader.h" />
+    <ClInclude Include="..\nvvk_resources\nvgl\appwindowprofiler_gl.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvgl\base_gl.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvgl\contextwindow_gl.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvgl\error_gl.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvgl\extensions_gl.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvgl\glsltypes_gl.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvgl\profiler_gl.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvgl\programmanager_gl.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvh\appwindowcamerainertia.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvh\appwindowprofiler.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvh\bitarray.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvh\cameracontrol.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvh\camerainertia.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvh\cameramanipulator.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvh\filemapping.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvh\fileoperations.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvh\geometry.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvh\gltfscene.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvh\inputparser.h" />
+    <ClInclude Include="..\nvvk_resources\nvh\misc.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvh\nsightevents.h" />
+    <ClInclude Include="..\nvvk_resources\nvh\nvprint.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvh\parametertools.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvh\profiler.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvh\radixsort.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvh\shaderfilemanager.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvh\timesampler.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvh\trangeallocator.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvmath\nvmath.h" />
+    <ClInclude Include="..\nvvk_resources\nvmath\nvmath_glsltypes.h" />
+    <ClInclude Include="..\nvvk_resources\nvmath\nvmath_hlsltypes.h" />
+    <ClInclude Include="..\nvvk_resources\nvmath\nvmath_types.h" />
+    <ClInclude Include="..\nvvk_resources\nvpsystem.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvpwindow.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvvk\allocator_dedicated_vk.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvvk\allocator_dma_vk.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvvk\allocator_dma_vkgl.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvvk\allocator_vk.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvvk\allocator_vma_vk.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvvk\appbase_vkpp.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvvk\appwindowprofiler_vk.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvvk\buffers_vk.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvvk\commands_vk.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvvk\context_vk.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvvk\debug_util_vk.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvvk\descriptorsets_vk.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvvk\error_vk.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvvk\extensions_vk.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvvk\gizmos_vk.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvvk\images_vk.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvvk\memorymanagement_vk.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvvk\memorymanagement_vkgl.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvvk\pipeline_vk.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvvk\profiler_vk.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvvk\raytraceKHR_vk.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvvk\raytraceNV_vk.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvvk\renderpasses_vk.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvvk\samplers_vk.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvvk\shadermodulemanager_vk.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvvk\shaders_vk.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvvk\structs_vk.hpp" />
+    <ClInclude Include="..\nvvk_resources\nvvk\swapchain_vk.hpp" />
+    <ClInclude Include="framework.h" />
+    <ClInclude Include="pch.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\nvvk_resources\fileformats\cadscenefile.cpp" />
+    <ClCompile Include="..\nvvk_resources\fileformats\cgltf.cpp" />
+    <ClCompile Include="..\nvvk_resources\fileformats\nv_dds.cpp" />
+    <ClCompile Include="..\nvvk_resources\nvgl\appwindowprofiler_gl.cpp" />
+    <ClCompile Include="..\nvvk_resources\nvgl\contextwindow_gl.cpp" />
+    <ClCompile Include="..\nvvk_resources\nvgl\error_gl.cpp" />
+    <ClCompile Include="..\nvvk_resources\nvgl\extensions_gl.cpp" />
+    <ClCompile Include="..\nvvk_resources\nvgl\profiler_gl.cpp" />
+    <ClCompile Include="..\nvvk_resources\nvgl\programmanager_gl.cpp" />
+    <ClCompile Include="..\nvvk_resources\nvh\appwindowprofiler.cpp" />
+    <ClCompile Include="..\nvvk_resources\nvh\bitarray.cpp" />
+    <ClCompile Include="..\nvvk_resources\nvh\cameramanipulator.cpp" />
+    <ClCompile Include="..\nvvk_resources\nvh\filemapping.cpp" />
+    <ClCompile Include="..\nvvk_resources\nvh\gltfscene.cpp" />
+    <ClCompile Include="..\nvvk_resources\nvh\nvprint.cpp" />
+    <ClCompile Include="..\nvvk_resources\nvh\parametertools.cpp" />
+    <ClCompile Include="..\nvvk_resources\nvh\profiler.cpp" />
+    <ClCompile Include="..\nvvk_resources\nvh\shaderfilemanager.cpp" />
+    <ClCompile Include="..\nvvk_resources\nvpsystem.cpp" />
+    <ClCompile Include="..\nvvk_resources\nvpsystem_win32.cpp" />
+    <ClCompile Include="..\nvvk_resources\nvpwindow.cpp" />
+    <ClCompile Include="..\nvvk_resources\nvvk\allocator_dma_vkgl.cpp" />
+    <ClCompile Include="..\nvvk_resources\nvvk\appwindowprofiler_vk.cpp" />
+    <ClCompile Include="..\nvvk_resources\nvvk\commands_vk.cpp" />
+    <ClCompile Include="..\nvvk_resources\nvvk\context_vk.cpp" />
+    <ClCompile Include="..\nvvk_resources\nvvk\debug_util_vk.cpp" />
+    <ClCompile Include="..\nvvk_resources\nvvk\descriptorsets_vk.cpp" />
+    <ClCompile Include="..\nvvk_resources\nvvk\error_vk.cpp" />
+    <ClCompile Include="..\nvvk_resources\nvvk\extensions_vk.cpp" />
+    <ClCompile Include="..\nvvk_resources\nvvk\gizmos_vk.cpp" />
+    <ClCompile Include="..\nvvk_resources\nvvk\images_vk.cpp" />
+    <ClCompile Include="..\nvvk_resources\nvvk\memorymanagement_vk.cpp" />
+    <ClCompile Include="..\nvvk_resources\nvvk\memorymanagement_vkgl.cpp" />
+    <ClCompile Include="..\nvvk_resources\nvvk\pipeline_vk.cpp" />
+    <ClCompile Include="..\nvvk_resources\nvvk\profiler_vk.cpp" />
+    <ClCompile Include="..\nvvk_resources\nvvk\renderpasses_vk.cpp" />
+    <ClCompile Include="..\nvvk_resources\nvvk\samplers_vk.cpp" />
+    <ClCompile Include="..\nvvk_resources\nvvk\shadermodulemanager_vk.cpp" />
+    <ClCompile Include="..\nvvk_resources\nvvk\swapchain_vk.cpp" />
+    <ClCompile Include="nvvk_lib.cpp" />
+    <ClCompile Include="pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\nvvk_resources\nvgl\extensions_gl.lua" />
+    <None Include="..\nvvk_resources\nvmath\nvmath.inl" />
+    <None Include="..\nvvk_resources\nvvk\extensions_vk.lua" />
+    <None Include="..\nvvk_resources\nvvk\structs_vk.lua" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
