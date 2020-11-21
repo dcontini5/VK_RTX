@@ -60,127 +60,57 @@ void main()
                  (maxC == absN.y) ? vec3(0, sign(normal.y), 0) : vec3(0, 0, sign(normal.z));
   }
 
-  // Vector toward the light
-  vec3  L;
-  float lightIntensity = pushC.lightIntensity;
-  float lightDistance  = 100000.0;
-  // Point light
-  if(pushC.lightType == 0)
-  {
-    vec3 lDir      = pushC.lightPosition - worldPos;
-    lightDistance  = length(lDir);
-    lightIntensity = pushC.lightIntensity / (lightDistance * lightDistance);
-    L              = normalize(lDir);
-  }
-  else  // Directional light
-  {
-    L = normalize(pushC.lightPosition - vec3(0));
-  }
-
+ 
   // Material of the object
-  int               matIdx = matIndex[nonuniformEXT(gl_InstanceID)].i[gl_PrimitiveID];
+   int               matIdx = matIndex[nonuniformEXT(gl_InstanceID)].i[gl_PrimitiveID];
   WaveFrontMaterial mat    = materials[nonuniformEXT(gl_InstanceID)].m[matIdx];
   
-  // Diffuse
-  vec3  diffuse     = computeDiffuse(mat, L, normal);
-  vec3  specular    = vec3(0);
-  float attenuation = 1.0;
-  float minAtt = 0.3;
+  vec3         emittance = mat.emission;
   
-  //vec3 normL = normalize(L);
+  // Pick a random direction from here and keep going.
   vec3 tangent, bitangent;
-  createCoordinateSystem(L, tangent, bitangent);
-
-  //Move this value into const buffer
-  float lightRadius = pushC.areaLightRadius;
-
-  float maxCosTheta = calcMaxCosTheta(L, lightDistance, tangent, lightRadius);
-
-  uint noOfSamples = 4;
-  float attCoeff = (attenuation - minAtt) / noOfSamples;
-  float attSum = 0;
-
-  // Tracing shadow ray only if the light is visible from the surface
-  if(dot(normal, L) > 0)
-  {
-
-	for(int i = 0; i < noOfSamples; i++){
-		
-		
-
-		float tMin   = 0.001;
-		float tMax   = lightDistance;
-		vec3  origin = gl_WorldRayOriginEXT + gl_WorldRayDirectionEXT * gl_HitTEXT;
-		//vec3  rayDir = L;
-		vec3  rayDir = samplingCone(prd.seed, maxCosTheta, tangent, bitangent, L);
-		uint  flags  = gl_RayFlagsTerminateOnFirstHitEXT | gl_RayFlagsOpaqueEXT
-		             | gl_RayFlagsSkipClosestHitShaderEXT;
-		isShadowed = true;
-		traceRayEXT(topLevelAS,  // acceleration structure
-		            flags,       // rayFlags
-		            0xFF,        // cullMask
-		            0,           // sbtRecordOffset
-		            0,           // sbtRecordStride
-		            1,           // missIndex
-		            origin,      // ray origin
-		            tMin,        // ray min range
-		            rayDir,      // ray direction
-		            tMax,        // ray max range
-		            1            // payload (location = 1)
-		);
-
-		if(isShadowed)
-		{
-
-		  
-		  attSum += attCoeff;
-		  
-		}
-		else
-		{
-		  // Specular
-		  specular = computeSpecular(mat, gl_WorldRayDirectionEXT, L, normal);
-		}
-		
-	}
-  }
-
-  //attSum /= noOfSamples;
-  attenuation -= attSum;
-  //reflection
-  float cosTheta = 1;
-
-   if(mat.illum == 2) {
-  
-	vec3 origin = worldPos;
-	
-	vec3 rayDir = refract(gl_WorldRayDirectionEXT, normal, mat.ior);
-	createCoordinateSystem(rayDir, tangent, bitangent);
-	prd.attenuation *= vec3(0.7f);
-	prd.done = 0;
-	prd.rayOrigin = origin;
-	prd.rayDir = samplingPhongDistribution(prd.seed, 0.95 + pushC.sphereGlossiness, tangent, bitangent, rayDir);
-	cosTheta = dot(rayDir, prd.rayDir);
-	//diffuse = vec3(0);
-
-  }
+  createCoordinateSystem(normal, tangent, bitangent);
+  vec3 rayOrigin    = worldPos;
  
-   if(mat.illum == 3) {
+  float p = 1.0 / M_PI;
+
+  vec3 rayDirection = vec3(0);
   
-	vec3 origin = worldPos;
+  if(mat.illum == 3){
+  
 	vec3 rayDir = reflect(gl_WorldRayDirectionEXT, normal);
 	createCoordinateSystem(rayDir, tangent, bitangent);
-	prd.attenuation *= mat.specular;
-	prd.done = 0;
-	prd.rayOrigin = origin;
-	prd.rayDir = samplingPhongDistribution(prd.seed, 0.95 + pushC.sphereGlossiness, tangent, bitangent, rayDir);
-	cosTheta = dot(rayDir, prd.rayDir);
-	//diffuse = vec3(0);
+	rayDirection = samplingPhongDistribution(prd.seed, 0.95 + pushC.sphereGlossiness, tangent, bitangent, rayDir);
 
-  }
- 
+  }  else if(mat.illum == 2){
 
- 
-  prd.hitValue += vec3(lightIntensity * attenuation * (diffuse + specular)) * cosTheta;
+  	vec3 rayDir = refract(gl_WorldRayDirectionEXT, normal, mat.ior);
+	createCoordinateSystem(rayDir, tangent, bitangent);
+	rayDirection = samplingPhongDistribution(prd.seed, 0.95 + pushC.sphereGlossiness, tangent, bitangent, rayDir);
+	
+
+  }else
+  rayDirection = samplingHemisphere2(prd.seed, tangent, bitangent, normal, p);
+
+
+  //p = 1.0 / M_PI;
   
+  // Compute the BRDF for this ray (assuming Lambertian reflection)
+  // BRDF = Bidirectional Reflectance Distribution Function
+  float cos_theta = dot(rayDirection, normal);
+
+
+  vec3  albedo    = mat.diffuse;
+
+  vec3 BRDF = albedo / M_PI;
+	
+	//if(mat.illum == 3 || mat.illum == 2) BRDF = albedo;
+
+  prd.rayOrigin    = rayOrigin;
+  prd.rayDir = rayDirection;
+  prd.hitValue     = emittance;
+  prd.weight       = BRDF * cos_theta / p;
+  return;
+
 }
+

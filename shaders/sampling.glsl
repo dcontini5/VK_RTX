@@ -1,6 +1,8 @@
 // Generate a random unsigned int from two unsigned int values, using 16 pairs
 // of rounds of the Tiny Encryption Algorithm. See Zafar, Olano, and Curtis,
 // "GPU Random Numbers via the Tiny Encryption Algorithm"
+#define M_PI 3.141592
+
 uint tea(uint val0, uint val1)
 {
   uint v0 = val0;
@@ -51,6 +53,21 @@ vec3 samplingHemisphere(inout uint seed, in vec3 x, in vec3 y, in vec3 z)
   direction      = direction.x * x + direction.y * y + direction.z * z;
 
   return direction;
+}
+
+vec3 samplingHemisphere2(inout uint seed, in vec3 x, in vec3 y, in vec3 z, out float p)
+{
+#define M_PI 3.141592
+
+	float u0 = rnd(seed);
+	float u1 = rnd(seed);
+	float sq = sqrt(u0);
+
+	vec3 direction = vec3(cos(2 * M_PI * u1) * sq, sin(2 * M_PI * u1) * sq, sqrt(1 - u0));
+	p = direction.z / M_PI;
+	direction = direction.x * x + direction.y * y + direction.z * z;
+
+	return direction;
 }
 
 // Return the tangent and binormal from the incoming normal

@@ -13,5 +13,9 @@ layout(push_constant) uniform Constants{
 
 void main()
 {
+      if(prd.depth == 0)
     prd.hitValue = clearColor.xyz * 0.8;
+	else
+    prd.hitValue = vec3(0.01);  // No contribution from environment
+	prd.depth = 100;
 }

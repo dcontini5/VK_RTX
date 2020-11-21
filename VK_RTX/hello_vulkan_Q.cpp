@@ -231,6 +231,7 @@ void HelloVulkan::loadModel(const std::string& filename, nvmath::mat4f transform
     m.ambient  = nvmath::pow(m.ambient, 2.2f);
     m.diffuse  = nvmath::pow(m.diffuse, 2.2f);
     m.specular = nvmath::pow(m.specular, 2.2f);
+  	m.emission = nvmath::vec3f(0.0f, 0.0f, 0.0f);
   }
 
   ObjInstance instance;
@@ -1211,20 +1212,25 @@ void HelloVulkan::Pathtrace(const vk::CommandBuffer& pCommandBuffer,
 void HelloVulkan::CreateSpheres(){
 
 
-const uint32_t noOfSpheres = 9;
+const uint32_t noOfSpheres = 10;
 	
   Sphere s;
   mSpheres.resize(noOfSpheres);
 	
     for(uint32_t i = 0; i < noOfSpheres; i++)
   {
+		s.radius = 0.5f;
+    	
 	if (i == noOfSpheres - 1) {
 			s.center = nvmath::vec3f(6.0, 1.5, 0.0);
 	}else if(i == noOfSpheres - 2){
 		s.center = nvmath::vec3f(0.5, 1.5, 0.0);
+	}else if(i == noOfSpheres - 3){
+		s.center = nvmath::vec3f(10.f, 15.f, 8.f);
+		s.radius = 1.0f;
     }else  s.center = nvmath::vec3f(1.0 + i, 0.0, 0.0);
    
-    s.radius     = 0.5f;
+    
     mSpheres[i]  = std::move(s);
   }
 	
@@ -1244,8 +1250,9 @@ const uint32_t noOfSpheres = 9;
 
   MaterialObj mat;
   mat.ambient = vec3f(0.001, 0.001, 0.001);
-  mat.diffuse = vec3f(0, 0, 0);
+  mat.diffuse = vec3f(1.f, 1.f, 1.f);
   mat.specular = vec3f(0.8, 0.8, 0.8);
+  mat.emission = vec3f(0.f, 0.f, 0.f);
   mat.shininess = 100.f;
   //mat.ior = 1.0f / 1.31f; //Air/Ice
   mat.ior = 1.0f / 1.50f;	//Air/Glass
@@ -1265,12 +1272,18 @@ const uint32_t noOfSpheres = 9;
 	//todo continue
   //mat.ambient = vec3f(0.3, 0.3, 0.3);
   mat.ambient = vec3f(0.008, 0.008, 0.008);
-  mat.diffuse = vec3f(0.008, 0.008, 0.008);
+  mat.diffuse = vec3f(1.f, 1.f, 1.f);
  // mat.diffuse = vec3f(0.9, 0.9, 0.9);
   mat.specular = vec3f(0.8, 0.8, 0.8);
   mat.shininess = 200.f;
   //mat.specular = 0.1f;
   mat.illum = 3;
+  materials.emplace_back(mat);
+  //mat.ambient = vec3f(0.3, 0.3, 0.3);
+  //mat.ambient = vec3f(0.008, 0.008, 0.008);
+  mat.diffuse = vec3f(1.f, 1.f, 1.f);
+  mat.emission = vec3f(100.f, 100.f, 100.f);
+  mat.illum = 4;
   materials.emplace_back(mat);
 
 	
@@ -1282,8 +1295,9 @@ const uint32_t noOfSpheres = 9;
   	if(i < 3 ) matIdx[i] = i % materials.size();
 	else matIdx[i] = 1;
   }
-  matIdx[matIdx.size() - 1] = materials.size() - 1;
-  matIdx[matIdx.size() - 2] = materials.size() - 1;
+  matIdx[matIdx.size() - 1] = materials.size() - 2;
+  matIdx[matIdx.size() - 2] = materials.size() - 2;
+  matIdx[matIdx.size() - 3] = materials.size() - 1;
 
   // Creating all buffers
   using vkBU = vk::BufferUsageFlagBits;
