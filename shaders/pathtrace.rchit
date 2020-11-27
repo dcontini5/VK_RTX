@@ -36,7 +36,10 @@ layout(push_constant) uniform Constants
   int   frame;
   float accWeight;
   float mirrorGlossiness;
-  //int   noOfSamples;
+  float sphereGlossiness;
+  float apertureRadius;
+  float	focalLenght;
+  int	lightIndex;
 }
 pushC;
 
@@ -83,32 +86,35 @@ void main()
 
   vec3 rayDirection = vec3(0);
   
+  
+  // Compute the BRDF for this ray (assuming Lambertian reflection)
+  // BRDF = Bidirectional Reflectance Distribution Function
+  float cos_theta;
+
+
   if(mat.illum == 3){
   
 	vec3 rayDir = reflect(gl_WorldRayDirectionEXT, normal);
 	createCoordinateSystem(rayDir, tangent, bitangent);
-	rayDirection = samplingPhongDistribution(prd.seed, 0.95 + pushC.mirrorGlossiness, tangent, bitangent, rayDir);
+	rayDirection = samplingPhongDistribution(prd.seed, pushC.mirrorGlossiness, tangent, bitangent, rayDir, p, normal);
+	cos_theta = dot(rayDirection, rayDir);
 
-  }  else
-  rayDirection = samplingHemisphere2(prd.seed, tangent, bitangent, normal, p);
+  }  else{
+	rayDirection = samplingHemisphere2(prd.seed, tangent, bitangent, normal, p);
+	cos_theta = dot(rayDirection, normal);
+  }
 
- // p = 1.0 / M_PI;
-  
-
-  // Compute the BRDF for this ray (assuming Lambertian reflection)
-  // BRDF = Bidirectional Reflectance Distribution Function
-  float cos_theta = dot(rayDirection, normal);
 
 
   vec3  albedo    = mat.diffuse;
 
   vec3 BRDF = albedo / M_PI;
 
-  if(mat.illum == 3) BRDF = albedo;
+  if(mat.illum == 3) BRDF = albedo * p;
 
   prd.rayOrigin    = rayOrigin;
   prd.rayDir = rayDirection;
-  prd.hitValue     = emittance;
+  prd.hitValue     = emittance ;
   prd.weight       = BRDF * cos_theta / p;
   return;
 

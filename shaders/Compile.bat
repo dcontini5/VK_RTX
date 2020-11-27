@@ -13,6 +13,7 @@ glslangValidator pathtrace.rchit -V -o pathtrace.rchit.spv
 glslangValidator raytrace2.rchit -V -o raytrace2.rchit.spv
 glslangValidator raytrace.rint -V -o raytrace.rint.spv
 
+PAUSE
 
 
 

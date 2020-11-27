@@ -1,10 +1,10 @@
 _______________
 Vulkan Version:
- - available:  1.2.148
+ - available:  1.2.154
  - requesting: 1.2.0
 ___________________________
 Available Instance Layers :
-VK_LAYER_NV_optimus (v. 402095 1) : NVIDIA Optimus layer
+VK_LAYER_NV_optimus (v. 4020a0 1) : NVIDIA Optimus layer
 VK_LAYER_NV_nomad_release_public_2020_4_0 (v. 402083 1) : NVIDIA Nsight Graphics interception layer
 VK_LAYER_NV_GPU_Trace_release_public_2020_4_0 (v. 402083 1) : NVIDIA Nsight Graphics GPU Trace interception layer
 VK_LAYER_OW_OVERLAY (v. 401079 1) : Overwolf Overlay Layer
@@ -19,6 +19,7 @@ VK_LAYER_LUNARG_monitor (v. 40208d 1) : Execution Monitoring Layer
 VK_LAYER_LUNARG_screenshot (v. 40208d 1) : LunarG image capture layer
 VK_LAYER_LUNARG_vktrace (v. 40208d 1) : Vktrace tracing library
 VK_LAYER_ROCKSTAR_GAMES_social_club (v. 400046 1) : Rockstar Games Social Club Layer
+VK_LAYER_NV_nsight-sys (v. 401061 2) : NVIDIA Nsight Systems profiler layer
 
 Available Instance Extensions :
 VK_KHR_device_group_creation (v. 1)
@@ -54,6 +55,7 @@ VK_KHR_16bit_storage (v. 1)
 VK_KHR_8bit_storage (v. 1)
 VK_KHR_bind_memory2 (v. 1)
 VK_KHR_buffer_device_address (v. 1)
+VK_KHR_copy_commands2 (v. 1)
 VK_KHR_create_renderpass2 (v. 1)
 VK_KHR_dedicated_allocation (v. 3)
 VK_KHR_deferred_host_operations (v. 3)
@@ -68,6 +70,7 @@ VK_KHR_external_memory (v. 1)
 VK_KHR_external_memory_win32 (v. 1)
 VK_KHR_external_semaphore (v. 1)
 VK_KHR_external_semaphore_win32 (v. 1)
+VK_KHR_fragment_shading_rate (v. 1)
 VK_KHR_get_memory_requirements2 (v. 1)
 VK_KHR_image_format_list (v. 1)
 VK_KHR_imageless_framebuffer (v. 1)
@@ -90,6 +93,7 @@ VK_KHR_shader_float16_int8 (v. 1)
 VK_KHR_shader_float_controls (v. 4)
 VK_KHR_shader_non_semantic_info (v. 1)
 VK_KHR_shader_subgroup_extended_types (v. 1)
+VK_KHR_shader_terminate_invocation (v. 1)
 VK_KHR_spirv_1_4 (v. 1)
 VK_KHR_storage_buffer_storage_class (v. 1)
 VK_KHR_swapchain (v. 70)
@@ -102,9 +106,4 @@ VK_KHR_win32_keyed_mutex (v. 1)
 VK_EXT_4444_formats (v. 1)
 VK_EXT_blend_operation_advanced (v. 2)
 VK_EXT_buffer_device_address (v. 2)
-VK_EXT_calibrated_timestamps (v. 1)
-VK_EXT_conditional_rendering (v. 2)
-VK_EXT_conservative_rasterization (v. 1)
-VK_EXT_custom_border_color (v. 12)
-VK_EXT_depth_clip_enable (v. 1)
-VK_E
+V

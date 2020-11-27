@@ -3,10 +3,12 @@
 #extension GL_EXT_nonuniform_qualifier : enable
 #extension GL_EXT_scalar_block_layout : enable
 #extension GL_GOOGLE_include_directive : enable
+
 #include "raycommon.glsl"
 #include "wavefront.glsl"
 
 hitAttributeEXT vec3 HitAttribute;
+
 
 layout(binding = 7, set = 1, scalar) buffer allSpheres_
 {
@@ -65,6 +67,14 @@ void main()
   float tHit    = -1;
   int   hitKind = gl_PrimitiveID % 2 == 0 ? KIND_SPHERE : KIND_CUBE;
   if(gl_PrimitiveID > 2) hitKind = KIND_SPHERE;
+
+  //if(pushC.lightIndex == gl_PrimitiveID) {
+ //	
+ //	sphere.center = pushC.lightPosition;
+ //	sphere.radius = pushC.areaLightRadius;
+  //
+  //}
+
   if(hitKind == KIND_SPHERE)
   {
     // Sphere intersection

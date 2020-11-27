@@ -61,10 +61,14 @@ static void onErrorCallback(int error, const char* description)
   fprintf(stderr, "GLFW Error %d: %s\n", error, description);
 }
 
+const char* const items[] = { "1","10","100","1000","10000","100000", "1000000" };
+
 // Extra UI
 void renderUI(HelloVulkan& helloVk)
 {
   static int item = 1;
+  static int MGitem = 6;
+  static int SGitem = 6;
   if(ImGui::Combo("Up Vector", &item, "X\0Y\0Z\0\0"))
   {
     nvmath::vec3f pos, eye, up;
@@ -73,14 +77,29 @@ void renderUI(HelloVulkan& helloVk)
     CameraManip.setLookat(pos, eye, up);
   }
   ImGui::SliderFloat3("Light Position", &helloVk.m_pushConstant.lightPosition.x, -20.f, 20.f);
-  ImGui::SliderFloat("Light Intensity", &helloVk.m_pushConstant.lightIntensity, 0.f, 100.f);
+  ImGui::SliderFloat("Light Intensity", &helloVk.m_pushConstant.lightIntensity, 0.f, 1000.f);
   ImGui::SliderFloat("Area Light Radius", &helloVk.mRtPushConstants.areaLightRadius, 0.1f, 100.f);
+
+  ImGui::SliderFloat("Aperture Time", &helloVk.mRtPushConstants.accumulationWeight, 0.001f, 2.0f);
   //ImGui::RadioButton("Point", &helloVk.m_pushConstant.lightType, 0);
   //ImGui::SameLine();
   //ImGui::RadioButton("Infinite", &helloVk.m_pushConstant.lightType, 1);
-  ImGui::SliderFloat("Interpolation Weight", &helloVk.mRtPushConstants.accumulationWeight, 0.001f, 1.0f);
-  ImGui::SliderFloat("Mirror Glossiness", &helloVk.mRtPushConstants.mirrorGlossiness, 0.045f, 0.05f, "%.5f");
-  ImGui::SliderFloat("Sphere Glossiness", &helloVk.mRtPushConstants.sphereGlossiness, 0.005f, 0.05f);
+  //ImGui::SliderFloat("Interpolation Weight", &helloVk.mRtPushConstants.accumulationWeight, 0.001f, 1.0f);
+  
+
+  
+	if (ImGui::Combo("Mirror Glossiness", &MGitem, items, 7))
+  {
+		helloVk.mRtPushConstants.mirrorGlossiness = pow(10.f, MGitem);
+  }
+  if (ImGui::Combo("Sphere Glossiness", &SGitem, items, 7))
+  {
+	  helloVk.mRtPushConstants.sphereGlossiness = pow(10.f, SGitem);
+  }
+	
+	
+  //ImGui::SliderFloat("Mirror Glossiness", &helloVk.mRtPushConstants.mirrorGlossiness, 0.045f, 0.05f, "%.5f");
+ // ImGui::SliderFloat("Sphere Glossiness", &helloVk.mRtPushConstants.sphereGlossiness, 0.005f, 0.05f);
   ImGui::SliderInt("Max Depth", &helloVk.mRtPushConstants.maxDepth, 1, 100);
   ImGui::SliderFloat("Aperture Radius", &helloVk.mRtPushConstants.apertureRadius, 0.0001f, 1.f, "%.4f");
   ImGui::SliderFloat("Focal Length", &helloVk.mRtPushConstants.focalLength, 1.f, 50.f);
@@ -236,7 +255,7 @@ int main(int argc, char** argv)
  
 	
 
-	nvmath::vec4f clearColor = nvmath::vec4f(0, 0, 0, 1.00f);
+	nvmath::vec4f clearColor = nvmath::vec4f(0.52, 0.80, 0.92, 1.00f);
   bool          useRayTracer = true;
 
   helloVk.setupGlfwCallbacks(window);
@@ -256,6 +275,8 @@ int main(int argc, char** argv)
     // Updating camera buffer
     helloVk.updateUniformBuffer();
 
+
+  	
     // Show UI window.
     if(1 == 1)
     {
@@ -263,7 +284,7 @@ int main(int argc, char** argv)
       renderUI(helloVk);
       ImGui::Text("Application average %.3f ms/frame (%.1f FPS)",
                   1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-
+	  
       ImGui::Checkbox("Ray Tracer Mode", &useRayTracer);
       ImGui::Render();
     }

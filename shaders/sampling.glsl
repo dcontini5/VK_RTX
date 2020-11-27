@@ -86,8 +86,10 @@ float calcMaxCosTheta(in vec3 N, in float L,  in vec3 T, in float R){
 
 }
 
-vec3 samplingCone(inout uint seed, in float maxCosTheta, in vec3 x, in vec3 y, in vec3 z){
+vec3 samplingCone(inout uint seed, in float maxCosTheta, in vec3 x, in vec3 y, in vec3 z, inout float p){
 	
+	
+
 	float r1 = rnd(seed);
 	float r2 = rnd(seed);
 
@@ -102,26 +104,29 @@ vec3 samplingCone(inout uint seed, in float maxCosTheta, in vec3 x, in vec3 y, i
 							
 	direction = direction.x * x + direction.y * y + direction.z * z;
 	
+	p = 1 / (2 * M_PI * (1 - maxCosTheta));
 
 	return direction;
 
 }
 
 
-vec3 samplingPhongDistribution(inout uint seed, in float maxCosTheta, in vec3 x, in vec3 y, in vec3 z){
+vec3 samplingPhongDistribution(inout uint seed, in float exp, in vec3 x, in vec3 y, in vec3 z, inout float p, in vec3 N) {
 	
-	float r1 = rnd(seed);
-	float r2 = rnd(seed);
+	float u0 = rnd(seed);
+	float u1 = rnd(seed);
 
-	float cosTheta = (1 - r1) + r1 * maxCosTheta;
+	float cosTheta = pow(1 - u0, 1/(1 + exp));
 	float sinTheta = sqrt(1 - cosTheta * cosTheta);
-	float phi = r2 * 2 * M_PI;
+	float phi = u1 * 2 * M_PI;
 
-	vec3 direction = vec3(cos(phi) * sinTheta,
+	vec3 refDirection = vec3(cos(phi) * sinTheta,
 						sin(phi) * sinTheta,
 						cosTheta);
+	p = (exp + 1) / 2 * M_PI;
 
-	direction = direction.x * x + direction.y * y + direction.z * z;
+	vec3 direction =  refDirection.x * x + refDirection.y * y + refDirection.z * z;
+	
 
 	return direction;
 	

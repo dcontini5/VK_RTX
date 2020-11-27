@@ -1013,6 +1013,8 @@ void HelloVulkan::UpdateFrame(){
 	static nvmath::mat4f refCamMatrix;
 	static nvmath::vec3  refLight;
 
+	
+	
 	auto& m = CameraManip.getMatrix();
 	if(memcmp(&refCamMatrix.a00, &m.a00, sizeof(nvmath::mat4f)) !=0 || mRtPushConstants.lightPosition != refLight ){
 
@@ -1226,8 +1228,13 @@ const uint32_t noOfSpheres = 10;
 	}else if(i == noOfSpheres - 2){
 		s.center = nvmath::vec3f(0.5, 1.5, 0.0);
 	}else if(i == noOfSpheres - 3){
-		s.center = nvmath::vec3f(10.f, 15.f, 8.f);
-		s.radius = 1.0f;
+		s.center = nvmath::vec3f(3.f, 4.f, 0.f);
+		s.radius = 1.f;
+
+		m_pushConstant.lightPosition = s.center;
+		mRtPushConstants.areaLightRadius = s.radius;
+		mRtPushConstants.lightIndex = i;
+
     }else  s.center = nvmath::vec3f(1.0 + i, 0.0, 0.0);
    
     
@@ -1253,37 +1260,40 @@ const uint32_t noOfSpheres = 10;
   mat.diffuse = vec3f(1.f, 1.f, 1.f);
   mat.specular = vec3f(0.8, 0.8, 0.8);
   mat.emission = vec3f(0.f, 0.f, 0.f);
-  mat.shininess = 100.f;
+  mat.shininess = 0.f;
   //mat.ior = 1.0f / 1.31f; //Air/Ice
-  mat.ior = 1.0f / 1.50f;	//Air/Glass
+  mat.ior = 1.f / 1.50f;	//Air/Glass
   mat.illum = 2;
   materials.emplace_back(mat);
   mat.ambient = vec3f(0.0, 0.0, 0.1);
   mat.diffuse = vec3f(0, 0, 0.87);
   mat.specular = vec3f(0.1, 0.1, 0.1);
-  mat.shininess = 10.f;
+  mat.shininess = 0.f;
   mat.illum = 4;
   materials.emplace_back(mat);
   mat.ambient = vec3f(0.0, 0.1, 0.0);
   mat.diffuse = vec3f(0, 0.87, 0);
   mat.specular = vec3f(0.1, 0.1, 0.1);
-  mat.shininess = 2.f;
+  mat.shininess = 0.f;
   materials.emplace_back(mat);
-	//todo continue
-  //mat.ambient = vec3f(0.3, 0.3, 0.3);
   mat.ambient = vec3f(0.008, 0.008, 0.008);
-  mat.diffuse = vec3f(1.f, 1.f, 1.f);
- // mat.diffuse = vec3f(0.9, 0.9, 0.9);
-  mat.specular = vec3f(0.8, 0.8, 0.8);
-  mat.shininess = 200.f;
-  //mat.specular = 0.1f;
+	
+  mat.diffuse = vec3f(1.0f, 1.0f, 1.0f);
+  //mat.specular = vec3f(0.3f, 1.0f, 0.3f);
+  mat.specular = vec3f(0.8f, 0.8f, 0.8f);
+  //mat.specular = vec3f(0.f, 0.0f, 0.f);
+  mat.shininess = 0.6f;
+
+  //mat.diffuse = vec3f(1.f, 1.f, 1.f);
+  //mat.specular = vec3f(0.8, 0.f, 0.f);
+  //mat.shininess = 0.8f;
+	
   mat.illum = 3;
   materials.emplace_back(mat);
-  //mat.ambient = vec3f(0.3, 0.3, 0.3);
-  //mat.ambient = vec3f(0.008, 0.008, 0.008);
   mat.diffuse = vec3f(1.f, 1.f, 1.f);
   mat.emission = vec3f(100.f, 100.f, 100.f);
-  mat.illum = 4;
+  mat.shininess = 0.0f;
+  mat.illum = 5;
   materials.emplace_back(mat);
 
 	

@@ -125,16 +125,16 @@ public:
     nvmath::vec4f clearColor;
     nvmath::vec3f lightPosition;
     float         lightIntensity;
-	float		  areaLightRadius{ 10.f };
+	float		  areaLightRadius;
     int           lightType;
     int           maxDepth{10};
 	int			  frame{-1};
 	float		  accumulationWeight{ .5f };
-	float		  mirrorGlossiness{ .05f };
-	float		  sphereGlossiness{ .05f };
+	float		  mirrorGlossiness{ 1000000 };
+	float		  sphereGlossiness{ 1000000 };
 	float		  apertureRadius{ .001f };
-	float			  focalLength{ 16.f };
-	
+	float	      focalLength{ 16.f };
+	int			  lightIndex;
 	
 	
   };
