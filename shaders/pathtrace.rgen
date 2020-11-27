@@ -128,10 +128,10 @@ void main()
 		              0                  // payload (location = 0)
 		  );
 
-		   curWeight *= prd.weight;
+		   
 
 		  hitValueSample += prd.hitValue * curWeight;
-		 
+		  curWeight *= prd.weight;
 		}
 
 		hitValue += hitValueSample;

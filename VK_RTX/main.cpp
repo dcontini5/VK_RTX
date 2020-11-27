@@ -77,7 +77,7 @@ void renderUI(HelloVulkan& helloVk)
     CameraManip.setLookat(pos, eye, up);
   }
   ImGui::SliderFloat3("Light Position", &helloVk.m_pushConstant.lightPosition.x, -20.f, 20.f);
-  ImGui::SliderFloat("Light Intensity", &helloVk.m_pushConstant.lightIntensity, 0.f, 1000.f);
+  ImGui::SliderFloat("Light Intensity", &helloVk.m_pushConstant.lightIntensity, 0.f, 100.f);
   ImGui::SliderFloat("Area Light Radius", &helloVk.mRtPushConstants.areaLightRadius, 0.1f, 100.f);
 
   ImGui::SliderFloat("Aperture Time", &helloVk.mRtPushConstants.accumulationWeight, 0.001f, 2.0f);

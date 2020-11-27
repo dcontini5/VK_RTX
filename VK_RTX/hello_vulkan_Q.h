@@ -88,7 +88,7 @@ public:
   {
     nvmath::vec3f lightPosition{10.f, 15.f, 8.f};
     int           instanceId{0};  // To retrieve the transformation matrix
-    float         lightIntensity{100.f};
+    float         lightIntensity{20.f};
     int           lightType{0};  // 0: point, 1: infinite
   	
   };
