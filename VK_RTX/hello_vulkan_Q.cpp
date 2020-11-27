@@ -1229,7 +1229,7 @@ const uint32_t noOfSpheres = 10;
 		s.center = nvmath::vec3f(0.5, 1.5, 0.0);
 	}else if(i == noOfSpheres - 3){
 		s.center = nvmath::vec3f(3.f, 4.f, 0.f);
-		s.radius = 1.f;
+		s.radius = 0.8f;
 
 		m_pushConstant.lightPosition = s.center;
 		mRtPushConstants.areaLightRadius = s.radius;
