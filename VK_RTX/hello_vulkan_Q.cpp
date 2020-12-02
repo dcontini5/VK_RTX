@@ -1228,15 +1228,15 @@ const uint32_t noOfSpheres = 10;
 	}else if(i == noOfSpheres - 2){
 		s.center = nvmath::vec3f(0.5, 1.5, 0.0);
 	}else if(i == noOfSpheres - 3){
-		s.center = nvmath::vec3f(3.f, 4.f, 0.f);
-		s.radius = 0.8f;
+		s.center = nvmath::vec3f(3.f, 4.f, 1.f);
+		s.radius = 0.5f;
 
 		m_pushConstant.lightPosition = s.center;
 		mRtPushConstants.areaLightRadius = s.radius;
 		mRtPushConstants.lightIndex = i;
 
-    }else  s.center = nvmath::vec3f(1.0 + i, 0.0, 0.0);
-   
+    }else  s.center = nvmath::vec3f(1.01 * (i + 1), 0.0, 0.0);
+	
     
     mSpheres[i]  = std::move(s);
   }

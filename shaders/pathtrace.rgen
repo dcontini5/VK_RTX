@@ -142,22 +142,17 @@ void main()
 
 	float exposure = pushC.accWeight;
 
-	hitValue = ACESFilm(hitValue * exposure);
 
 	if(pushC.frame > 0){
 		
 		float a         = 1.0f / float(pushC.frame + 1);
-		//vec3 oldColor = SRGBToLinear(imageLoad(image, ivec2(gl_LaunchIDEXT.xy)).xyz);
-		//imageStore(image, ivec2(gl_LaunchIDEXT.xy), vec4(LinearToSRGB(mix(oldColor, hitValue, a)), 1.f));
 		vec3 oldColor = imageLoad(image, ivec2(gl_LaunchIDEXT.xy)).xyz;
-		imageStore(image, ivec2(gl_LaunchIDEXT.xy), vec4(mix(oldColor, hitValue, a), 1.0));
-
-		//imageStore(image, ivec2(gl_LaunchIDEXT.xy), vec4(mix(oldColor, hitValue, pushC.accWeight), 1.0));
-
-
+		imageStore(image, ivec2(gl_LaunchIDEXT.xy), vec4(mix(oldColor, hitValue, a), exposure));
+		
+	
 	}else{
 
-		 imageStore(image, ivec2(gl_LaunchIDEXT.xy), vec4(hitValue, 1.0));
+		 imageStore(image, ivec2(gl_LaunchIDEXT.xy), vec4(hitValue, exposure));
 	}
    
 }

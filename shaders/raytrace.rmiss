@@ -16,7 +16,7 @@ void main()
     if(prd.depth == 0)
     prd.hitValue = clearColor.xyz * 0.8;
 	else
-    prd.hitValue = clearColor.xyz * 0.5;  // Lower contribution from environment
-    //prd.hitValue = clearColor.xyz;
+    //prd.hitValue = clearColor.xyz * 2.0;  // Lower contribution from environment
+    prd.hitValue = clearColor.xyz * 0.5;
 	prd.depth = 100;
 }
