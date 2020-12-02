@@ -68,7 +68,7 @@ void main()
   int   hitKind = gl_PrimitiveID % 2 == 0 ? KIND_SPHERE : KIND_CUBE;
   if(gl_PrimitiveID > 2) hitKind = KIND_SPHERE;
 
-  //if(pushC.lightIndex == gl_PrimitiveID) {
+ //if(pushC.lightIndex == gl_PrimitiveID) {
  //	
  //	sphere.center = pushC.lightPosition;
  //	sphere.radius = pushC.areaLightRadius;

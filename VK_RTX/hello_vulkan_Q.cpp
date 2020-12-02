@@ -231,7 +231,8 @@ void HelloVulkan::loadModel(const std::string& filename, nvmath::mat4f transform
     m.ambient  = nvmath::pow(m.ambient, 2.2f);
     m.diffuse  = nvmath::pow(m.diffuse, 2.2f);
     m.specular = nvmath::pow(m.specular, 2.2f);
-  	m.emission = nvmath::vec3f(0.0f, 0.0f, 0.0f);
+  	//m.emission = nvmath::vec3f(0.0f, 0.0f, 0.0f);
+  	m.emission = nvmath::pow(m.emission, 2.2f);
   }
 
   ObjInstance instance;
@@ -1227,15 +1228,15 @@ const uint32_t noOfSpheres = 10;
 			s.center = nvmath::vec3f(6.0, 1.5, 0.0);
 	}else if(i == noOfSpheres - 2){
 		s.center = nvmath::vec3f(0.5, 1.5, 0.0);
-	}else if(i == noOfSpheres - 3){
-		s.center = nvmath::vec3f(3.f, 4.f, 1.f);
-		s.radius = 0.5f;
-
-		m_pushConstant.lightPosition = s.center;
-		mRtPushConstants.areaLightRadius = s.radius;
-		mRtPushConstants.lightIndex = i;
-
-    }else  s.center = nvmath::vec3f(1.01 * (i + 1), 0.0, 0.0);
+	//}else if(i == noOfSpheres - 3){
+	//	s.center = nvmath::vec3f(3.f, 4.f, 1.f);
+	//	s.radius = 0.5f;
+	//
+	//	m_pushConstant.lightPosition = s.center;
+	//	mRtPushConstants.areaLightRadius = s.radius;
+	//	mRtPushConstants.lightIndex = i;
+	//
+    }else  s.center = nvmath::vec3f(1.f + i, 0.0, 0.0);
 	
     
     mSpheres[i]  = std::move(s);
@@ -1257,10 +1258,11 @@ const uint32_t noOfSpheres = 10;
 
   MaterialObj mat;
   mat.ambient = vec3f(0.001, 0.001, 0.001);
+  //mat.diffuse = vec3f(0.9f, 0.25f, 0.25f);
   mat.diffuse = vec3f(1.f, 1.f, 1.f);
-  mat.specular = vec3f(0.8, 0.8, 0.8);
+  mat.specular = vec3f(1.0, 1.0, 1.0) * 0.8f;
   mat.emission = vec3f(0.f, 0.f, 0.f);
-  mat.shininess = 0.f;
+  mat.shininess = 0.1f;
   //mat.ior = 1.0f / 1.31f; //Air/Ice
   mat.ior = 1.f / 1.50f;	//Air/Glass
   mat.illum = 2;
@@ -1278,22 +1280,22 @@ const uint32_t noOfSpheres = 10;
   materials.emplace_back(mat);
   mat.ambient = vec3f(0.008, 0.008, 0.008);
 	
-  mat.diffuse = vec3f(1.0f, 1.0f, 1.0f);
-  //mat.specular = vec3f(0.3f, 1.0f, 0.3f);
-  mat.specular = vec3f(0.8f, 0.8f, 0.8f);
-  //mat.specular = vec3f(0.f, 0.0f, 0.f);
-  mat.shininess = 0.6f;
+  mat.diffuse = vec3f(0.8f, 0.8f, 0.8f);
+  mat.specular = vec3f(1.f, 1.0f, 1.f);
+  //mat.diffuse = vec3f(0.9f, 0.5f, 0.9f);
+  //mat.specular = vec3f(0.9f, 0.9f, 0.9f);
+  mat.shininess = 0.7f;
 
   //mat.diffuse = vec3f(1.f, 1.f, 1.f);
   //mat.specular = vec3f(0.8, 0.f, 0.f);
   //mat.shininess = 0.8f;
-	
   mat.illum = 3;
   materials.emplace_back(mat);
-  mat.diffuse = vec3f(1.f, 1.f, 1.f);
-  mat.emission = vec3f(100.f, 100.f, 100.f);
-  mat.shininess = 0.0f;
-  mat.illum = 5;
+
+
+  mat.diffuse = vec3f(0.9f, 0.1f, 0.9f);
+  mat.specular = vec3f(1.f, 1.f, 1.f);
+  mat.shininess = 0.3f;
   materials.emplace_back(mat);
 
 	
@@ -1307,7 +1309,7 @@ const uint32_t noOfSpheres = 10;
   }
   matIdx[matIdx.size() - 1] = materials.size() - 2;
   matIdx[matIdx.size() - 2] = materials.size() - 2;
-  matIdx[matIdx.size() - 3] = materials.size() - 1;
+  matIdx[matIdx.size() - 6] = materials.size() - 1;
 
   // Creating all buffers
   using vkBU = vk::BufferUsageFlagBits;

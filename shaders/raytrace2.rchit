@@ -71,7 +71,7 @@ void main()
   vec3 emittance;
 
   if(mat.illum == 5)
-	emittance = vec3(pushC.lightIntensity);
+	emittance = mat.emission.xyz * vec3(pushC.lightIntensity);
   else 
 	emittance = mat.emission.xyz;
 
@@ -85,15 +85,15 @@ void main()
   vec3 rayDirection = gl_WorldRayDirectionEXT;
   
   vec3  albedo    = mat.diffuse;
-  //mat.illum = 4;
-  //
-  //if(rnd(prd.seed) < mat.shininess) {
-  //
-	//albedo = mat.specular;
-	//mat.illum = 3;
-  //
-  //
-  //}
+  (mat.illum == 3) ? 4 : mat.illum;
+  
+  if(rnd(prd.seed) < mat.shininess) {
+  
+	albedo = mat.specular;
+	mat.illum = 3;
+  
+  
+  }
 
    // Compute the BRDF for this ray (assuming Lambertian reflection)
   // BRDF = Bidirectional Reflectance Distribution Function
@@ -108,13 +108,13 @@ void main()
 	rayDirection = samplingPhongDistribution(prd.seed, pushC.sphereGlossiness, tangent, bitangent, rayDir, p, normal);
 	cos_theta = dot(rayDirection, rayDir);
 
-  }  else if(mat.illum == 2){
-
-  	vec3 rayDir = refract(gl_WorldRayDirectionEXT, normal, mat.ior);
-	createCoordinateSystem(rayDir, tangent, bitangent);
-	rayDirection = samplingPhongDistribution(prd.seed, pushC.sphereGlossiness, tangent, bitangent, rayDir, p, normal);
-	cos_theta = dot(rayDirection, rayDir);
-
+   }  else if(mat.illum == 2){
+	
+		vec3 rayDir = refract(gl_WorldRayDirectionEXT, normal, mat.ior);
+		createCoordinateSystem(rayDir, tangent, bitangent);
+		rayDirection = samplingPhongDistribution(prd.seed, pushC.sphereGlossiness, tangent, bitangent, rayDir, p, normal);
+		cos_theta = dot(rayDirection, rayDir);
+	
   }else{
 	rayDirection = samplingHemisphere2(prd.seed, tangent, bitangent, normal, p);
 	cos_theta = dot(rayDirection, normal);

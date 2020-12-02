@@ -73,8 +73,16 @@ void main()
   
   int               matIdx = matIndex[nonuniformEXT(objId)].i[gl_PrimitiveID];
   WaveFrontMaterial mat    = materials[nonuniformEXT(objId)].m[matIdx];
-  vec3         emittance = mat.emission;
+ 
+ 
+ 
+ vec3         emittance;
   
+  if(mat.illum == 5)
+	emittance = mat.emission.xyz * vec3(pushC.lightIntensity);
+  else 
+	emittance = mat.emission.xyz;
+
   // Pick a random direction from here and keep going.
   vec3 tangent, bitangent;
   createCoordinateSystem(normal, tangent, bitangent);

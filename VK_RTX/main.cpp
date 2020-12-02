@@ -224,7 +224,18 @@ int main(int argc, char** argv)
                      * nvmath::scale_mat4(nvmath::vec3f(5.f, 5.f, .1f)));
 	
   helloVk.loadModel(nvh::findFile("media/scenes/plane.obj", defaultSearchPaths), 
-	  nvmath::translation_mat4(nvmath::vec3f(0.f, -.5f, 0.f)));
+	  nvmath::translation_mat4(nvmath::vec3f(2.f, -.5f, 0.f))
+	  * nvmath::scale_mat4(nvmath::vec3f(0.5f, 1.f, .5f)));
+	
+// helloVk.loadModel(nvh::findFile("media/scenes/plane.obj", defaultSearchPaths),
+//	   nvmath::translation_mat4(nvmath::vec3f(2.f, 4.05f, 0.f))
+//	  * nvmath::rotation_mat4_x(3.1415927f)
+//	  * nvmath::scale_mat4(nvmath::vec3f(0.5f, 1.f, .5f))
+//	 );
+
+  helloVk.loadModel(nvh::findFile("media/scenes/light.obj", defaultSearchPaths),
+	  nvmath::translation_mat4(nvmath::vec3(3.f, 4.f, 1.f))
+	  * nvmath::scale_mat4(nvmath::vec3f(1.2f, 0.05f, 1.2f)));
 	
   //using intersection shader
   helloVk.CreateSpheres();
