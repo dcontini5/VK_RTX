@@ -1257,8 +1257,9 @@ const uint32_t noOfSpheres = 10;
   std::vector<MaterialObj> materials;
 
   MaterialObj mat;
+
+	//glass ball
   mat.ambient = vec3f(0.001, 0.001, 0.001);
-  //mat.diffuse = vec3f(0.9f, 0.25f, 0.25f);
   mat.diffuse = vec3f(1.f, 1.f, 1.f);
   mat.specular = vec3f(1.0, 1.0, 1.0) * 0.8f;
   mat.emission = vec3f(0.f, 0.f, 0.f);
@@ -1267,32 +1268,31 @@ const uint32_t noOfSpheres = 10;
   mat.ior = 1.f / 1.50f;	//Air/Glass
   mat.illum = 2;
   materials.emplace_back(mat);
+
+	//blue ball
   mat.ambient = vec3f(0.0, 0.0, 0.1);
   mat.diffuse = vec3f(0.10, 0.10, 0.9);
   mat.specular = vec3f(0.1, 0.1, 0.1);
   mat.shininess = 0.f;
   mat.illum = 4;
   materials.emplace_back(mat);
+
+	//green ball
   mat.ambient = vec3f(0.0, 0.1, 0.0);
   mat.diffuse = vec3f(0.10, 0.9, 0.10);
   mat.specular = vec3f(0.1, 0.1, 0.1);
   mat.shininess = 0.f;
   materials.emplace_back(mat);
+
+	//metal ball
   mat.ambient = vec3f(0.008, 0.008, 0.008);
-	
   mat.diffuse = vec3f(0.8f, 0.8f, 0.8f);
   mat.specular = vec3f(1.f, 1.0f, 1.f);
-  //mat.diffuse = vec3f(0.9f, 0.5f, 0.9f);
-  //mat.specular = vec3f(0.9f, 0.9f, 0.9f);
   mat.shininess = 0.7f;
-
-  //mat.diffuse = vec3f(1.f, 1.f, 1.f);
-  //mat.specular = vec3f(0.8, 0.f, 0.f);
-  //mat.shininess = 0.8f;
   mat.illum = 3;
   materials.emplace_back(mat);
 
-
+	//magenta metal ball
   mat.diffuse = vec3f(0.9f, 0.1f, 0.9f);
   mat.specular = vec3f(1.f, 1.f, 1.f);
   mat.shininess = 0.3f;
