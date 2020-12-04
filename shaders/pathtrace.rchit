@@ -76,17 +76,12 @@ void main()
  
  
  
- vec3         emittance;
+  vec3 emittance = mat.emission.xyz * vec3(pushC.lightIntensity);; 
   
-  if(mat.illum == 5)
-	emittance = mat.emission.xyz * vec3(pushC.lightIntensity);
-  else 
-	emittance = mat.emission.xyz;
-
   // Pick a random direction from here and keep going.
   vec3 tangent, bitangent;
   createCoordinateSystem(normal, tangent, bitangent);
-  vec3 rayOrigin    = worldPos;
+  vec3 rayOrigin = worldPos;
  
   
   float p = 1.0;
@@ -118,7 +113,7 @@ void main()
 
   vec3 BRDF = albedo / M_PI;
 
-  if(mat.illum == 3) BRDF = albedo * p;
+  if(mat.shininess > 0.0) BRDF = albedo * p;
 
   prd.rayOrigin    = rayOrigin;
   prd.rayDir = rayDirection;

@@ -68,38 +68,29 @@ void main()
    int               matIdx = matIndex[nonuniformEXT(gl_InstanceID)].i[gl_PrimitiveID];
   WaveFrontMaterial mat    = materials[nonuniformEXT(gl_InstanceID)].m[matIdx];
   
-  vec3 emittance;
-
-  if(mat.illum == 5)
-	emittance = mat.emission.xyz * vec3(pushC.lightIntensity);
-  else 
-	emittance = mat.emission.xyz;
-
+  vec3 emittance = mat.emission.xyz * vec3(pushC.lightIntensity);
+  
   // Pick a random direction from here and keep going.
   vec3 tangent, bitangent;
   createCoordinateSystem(normal, tangent, bitangent);
-  vec3 rayOrigin    = worldPos;
+  vec3 rayOrigin = worldPos;
  
   float p = 1.0;
 
   vec3 rayDirection = gl_WorldRayDirectionEXT;
   
-  vec3  albedo    = mat.diffuse;
-  (mat.illum == 3) ? 4 : mat.illum;
-  
+  vec3  albedo = mat.diffuse;
+    
   if(rnd(prd.seed) < mat.shininess) {
   
 	albedo = mat.specular;
 	mat.illum = 3;
-  
-  
+	 
   }
-
    // Compute the BRDF for this ray (assuming Lambertian reflection)
   // BRDF = Bidirectional Reflectance Distribution Function
 	 
   float cos_theta;
-
 
   if(mat.illum == 3){
   
@@ -122,16 +113,13 @@ void main()
 
   //p = 1.0 / M_PI;
   
-
-    
-
   vec3 BRDF = albedo / M_PI;
 	
-  if(mat.illum == 3 || mat.illum == 2) BRDF = albedo * p;
+  if(mat.shininess > 0) BRDF = albedo * p;
 
 
   prd.rayOrigin    = rayOrigin;
-  prd.rayDir = rayDirection;
+  prd.rayDir	   = rayDirection;
   prd.hitValue     = emittance;
   prd.weight       = BRDF * cos_theta / p;
   return;

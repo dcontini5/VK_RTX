@@ -1260,7 +1260,7 @@ const uint32_t noOfSpheres = 10;
 
 	//glass ball
   mat.ambient = vec3f(0.001, 0.001, 0.001);
-  mat.diffuse = vec3f(1.f, 1.f, 1.f);
+  mat.diffuse = vec3f(0.9f, 0.9f, 0.9f);
   mat.specular = vec3f(1.0, 1.0, 1.0) * 0.8f;
   mat.emission = vec3f(0.f, 0.f, 0.f);
   mat.shininess = 0.1f;
