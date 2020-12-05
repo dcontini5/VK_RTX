@@ -1228,14 +1228,6 @@ const uint32_t noOfSpheres = 10;
 			s.center = nvmath::vec3f(6.0, 1.5, 0.0);
 	}else if(i == noOfSpheres - 2){
 		s.center = nvmath::vec3f(0.5, 1.5, 0.0);
-	//}else if(i == noOfSpheres - 3){
-	//	s.center = nvmath::vec3f(3.f, 4.f, 1.f);
-	//	s.radius = 0.5f;
-	//
-	//	m_pushConstant.lightPosition = s.center;
-	//	mRtPushConstants.areaLightRadius = s.radius;
-	//	mRtPushConstants.lightIndex = i;
-	//
     }else  s.center = nvmath::vec3f(1.f + i, 0.0, 0.0);
 	
     
@@ -1258,7 +1250,7 @@ const uint32_t noOfSpheres = 10;
 
   MaterialObj mat;
 
-	//glass ball
+	//glass
   mat.ambient = vec3f(0.001, 0.001, 0.001);
   mat.diffuse = vec3f(0.9f, 0.9f, 0.9f);
   mat.specular = vec3f(1.0, 1.0, 1.0) * 0.8f;
@@ -1269,22 +1261,22 @@ const uint32_t noOfSpheres = 10;
   mat.illum = 2;
   materials.emplace_back(mat);
 
-	//blue ball
+	//blue
   mat.ambient = vec3f(0.0, 0.0, 0.1);
-  mat.diffuse = vec3f(0.10, 0.10, 0.9);
+  mat.diffuse = vec3f(0.1, 0.1, 0.9);
   mat.specular = vec3f(0.1, 0.1, 0.1);
   mat.shininess = 0.f;
   mat.illum = 4;
   materials.emplace_back(mat);
 
-	//green ball
+	//green
   mat.ambient = vec3f(0.0, 0.1, 0.0);
-  mat.diffuse = vec3f(0.10, 0.9, 0.10);
+  mat.diffuse = vec3f(0.1, 0.9, 0.1);
   mat.specular = vec3f(0.1, 0.1, 0.1);
   mat.shininess = 0.f;
   materials.emplace_back(mat);
 
-	//metal ball
+	//metallic
   mat.ambient = vec3f(0.008, 0.008, 0.008);
   mat.diffuse = vec3f(0.8f, 0.8f, 0.8f);
   mat.specular = vec3f(1.f, 1.0f, 1.f);
@@ -1292,7 +1284,7 @@ const uint32_t noOfSpheres = 10;
   mat.illum = 3;
   materials.emplace_back(mat);
 
-	//magenta metal ball
+	//magenta metallic
   mat.diffuse = vec3f(0.9f, 0.1f, 0.9f);
   mat.specular = vec3f(1.f, 1.f, 1.f);
   mat.shininess = 0.3f;
