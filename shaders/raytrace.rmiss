@@ -3,7 +3,7 @@
 #extension GL_GOOGLE_include_directive : enable
 #include "raycommon.glsl"
 
-layout(location = 0) rayPayloadInEXT hitPayload prd;
+layout(location = 0) rayPayloadInEXT RTHitPayload prd;
 
 layout(push_constant) uniform Constants{
 
@@ -13,10 +13,7 @@ layout(push_constant) uniform Constants{
 
 void main()
 {
-    if(prd.depth == 0)
-    prd.hitValue = clearColor.xyz * 0.8;
-	else
-    //prd.hitValue = clearColor.xyz * 2.0;  // Lower contribution from environment
-    prd.hitValue = clearColor.xyz * 0.5;
+
+    prd.hitValue = clearColor.xyz;
 	prd.depth = 100;
 }

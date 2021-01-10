@@ -179,7 +179,6 @@
     <None Include="..\shaders\raytrace.rgen" />
     <None Include="..\shaders\raytrace.rint" />
     <None Include="..\shaders\raytrace.rmiss" />
-    <None Include="..\shaders\raytrace2.rchit" />
     <None Include="..\shaders\raytraceShadow.rmiss" />
     <None Include="..\shaders\sampling.glsl" />
     <None Include="..\shaders\wavefront.glsl" />

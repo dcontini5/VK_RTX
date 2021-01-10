@@ -78,7 +78,7 @@ void renderUI(HelloVulkan& helloVk)
   }
   ImGui::SliderFloat3("Light Position", &helloVk.m_pushConstant.lightPosition.x, -20.f, 20.f);
   ImGui::SliderFloat("Light Intensity", &helloVk.m_pushConstant.lightIntensity, 0.f, 100.f);
-  ImGui::SliderFloat("Area Light Radius", &helloVk.mRtPushConstants.areaLightRadius, 0.1f, 100.f);
+  ImGui::SliderFloat("Area Light Radius", &helloVk.mRtPushConstants.areaLightRadius, 0.01f, 100.f);
 
   ImGui::SliderFloat("Aperture Time", &helloVk.mRtPushConstants.accumulationWeight, 0.001f, 2.0f);
   //ImGui::RadioButton("Point", &helloVk.m_pushConstant.lightType, 0);
@@ -101,7 +101,7 @@ void renderUI(HelloVulkan& helloVk)
   //ImGui::SliderFloat("Mirror Glossiness", &helloVk.mRtPushConstants.mirrorGlossiness, 0.045f, 0.05f, "%.5f");
  // ImGui::SliderFloat("Sphere Glossiness", &helloVk.mRtPushConstants.sphereGlossiness, 0.005f, 0.05f);
   ImGui::SliderInt("Max Depth", &helloVk.mRtPushConstants.maxDepth, 1, 100);
-  ImGui::SliderFloat("Aperture Radius", &helloVk.mRtPushConstants.apertureRadius, 0.0001f, 1.f, "%.4f");
+  ImGui::SliderFloat("Aperture Radius", &helloVk.mRtPushConstants.apertureRadius, 0.0001f, 0.1f, "%.4f");
   ImGui::SliderFloat("Focal Length", &helloVk.mRtPushConstants.focalLength, 1.f, 50.f);
   //ImGui::SliderInt("Number of Samples", &helloVk.mRtPushConstants.noOfSamples, 1, 100);
 }
@@ -213,28 +213,46 @@ int main(int argc, char** argv)
   helloVk.initGUI(0);  // Using sub-pass 0
 
   // Creation of the example
-  helloVk.loadModel(nvh::findFile("media/scenes/cube_multi.obj", defaultSearchPaths));
-  
-  helloVk.loadModel(nvh::findFile("media/scenes/cube.obj", defaultSearchPaths),
-                 nvmath::translation_mat4(nvmath::vec3(1.f, 0.f, -4.f))
-                     * nvmath::scale_mat4(nvmath::vec3f(5.f, 5.f, .1f)));
-	
-  helloVk.loadModel(nvh::findFile("media/scenes/cube.obj", defaultSearchPaths),
-                 nvmath::translation_mat4(nvmath::vec3(1.f, 0.f, 4.f))
-                     * nvmath::scale_mat4(nvmath::vec3f(5.f, 5.f, .1f)));
-	
-  helloVk.loadModel(nvh::findFile("media/scenes/plane.obj", defaultSearchPaths), 
-	  nvmath::translation_mat4(nvmath::vec3f(2.f, -.5f, 0.f))
-	  * nvmath::scale_mat4(nvmath::vec3f(0.5f, 1.f, .5f)));
-	
- helloVk.loadModel(nvh::findFile("media/scenes/plane.obj", defaultSearchPaths),
- 	   nvmath::translation_mat4(nvmath::vec3f(3.f, 4.06f, 1.0f))
- 	  * nvmath::rotation_mat4_x(3.1415927f)
- 	  * nvmath::scale_mat4(nvmath::vec3f(0.05f, 1.f, .05f))
- 	 );
 
-  helloVk.loadModel(nvh::findFile("media/scenes/light.obj", defaultSearchPaths),
-	  nvmath::translation_mat4(nvmath::vec3(3.f, 4.f, 1.f))
+	//Sphere used for furnace test
+	//helloVk.loadModel(nvh::findFile("media/scenes/sphere.obj", defaultSearchPaths));
+	
+	//Multicolor Cube
+	 helloVk.loadModel(nvh::findFile("media/scenes/cube_multi.obj", defaultSearchPaths));
+ 	
+	
+	//Mirrors
+	helloVk.loadModel(nvh::findFile("media/scenes/cube.obj", defaultSearchPaths),
+                nvmath::translation_mat4(nvmath::vec3(1.f, 1.7f, -5.f))
+                    * nvmath::scale_mat4(nvmath::vec3f(10.f, 5.f, .1f)));
+	
+	helloVk.loadModel(nvh::findFile("media/scenes/cube.obj", defaultSearchPaths),
+                nvmath::translation_mat4(nvmath::vec3(1.f, 1.7f, 5.f))
+                    * nvmath::scale_mat4(nvmath::vec3f(10.f, 5.f, .1f)));
+	
+	//Plane
+	helloVk.loadModel(nvh::findFile("media/scenes/plane.obj", defaultSearchPaths), 
+	  nvmath::translation_mat4(nvmath::vec3f(2.f, -0.5f, 0.f))
+	  * nvmath::scale_mat4(nvmath::vec3f(0.5f, 1.f, .5f)));
+
+	//White Wall
+	helloVk.loadModel(nvh::findFile("media/scenes/plane.obj", defaultSearchPaths),
+    nvmath::translation_mat4(nvmath::vec3f(-3.f, 0.1f, 0.f))
+	 * nvmath::rotation_mat4_z(3.14f * 1.5f)
+	 * nvmath::scale_mat4(nvmath::vec3f(0.2f, 1.f, .27f))
+	 );
+	
+	//Roof
+	helloVk.loadModel(nvh::findFile("media/scenes/plane.obj", defaultSearchPaths),
+	   nvmath::translation_mat4(nvmath::vec3f(3.f, 4.06f, 1.0f))
+	  * nvmath::rotation_mat4_x(3.1415927f)
+	 // * nvmath::scale_mat4(nvmath::vec3f(0.05f, 1.f, .05f))
+	  * nvmath::scale_mat4(nvmath::vec3f(0.5f, 1.f, .5f))
+	 );
+	
+	//Light
+	helloVk.loadModel(nvh::findFile("media/scenes/light.obj", defaultSearchPaths),
+	nvmath::translation_mat4(nvmath::vec3(3.f, 4.f, 1.f))
 	  * nvmath::scale_mat4(nvmath::vec3f(1.2f, 0.05f, 1.2f)));
 	
   //using intersection shader
@@ -242,7 +260,6 @@ int main(int argc, char** argv)
 
   helloVk.createOffscreenRender();
   helloVk.createDescriptorSetLayout();
-  //helloVk.createGraphicsPipeline();
   helloVk.createUniformBuffer();
   helloVk.createSceneDescriptionBuffer();
   helloVk.updateDescriptorSet();
@@ -253,10 +270,11 @@ int main(int argc, char** argv)
   helloVk.CreateBottomLevelAS();
   helloVk.CreateTopLevelAS();
   helloVk.CreateRtDescriptorSet();
-  helloVk.CreateRtPipeline();
+  //helloVk.CreateRtPipeline();
+  helloVk.CreatePtPipeline();
   helloVk.CreateRtShaderBindingTable();
 
-  helloVk.CreatePtPipeline();
+ 
 
 	
   helloVk.createPostDescriptor();
@@ -325,18 +343,10 @@ int main(int argc, char** argv)
       offscreenRenderPassBeginInfo.setRenderArea({{}, helloVk.getSize()});
 
       // Rendering Scene
-      if(useRayTracer){
+      
 
 		helloVk.Raytrace(cmdBuff, clearColor);
-      	
-      }else{
-
-		  helloVk.Pathtrace(cmdBuff, clearColor);
-		//cmdBuff.beginRenderPass(offscreenRenderPassBeginInfo, vk::SubpassContents::eInline);
-        //helloVk.rasterize(cmdBuff);
-        //cmdBuff.endRenderPass();
-      	
-      }
+ 
     	
     }
 

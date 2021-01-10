@@ -420,7 +420,7 @@ void HelloVulkan::destroyResources()
   m_device.destroy(mRtPipeline);
   m_device.destroy(mRtPipelineLayout);
 
-  m_device.destroy(mPtPipeline);
+  //m_device.destroy(mPtPipeline);
 
 	
   m_alloc.destroy(mRtSBTBuffer);
@@ -686,7 +686,6 @@ void HelloVulkan::CreateTopLevelAS(){
     rayInst.instanceId = i;
     rayInst.blasId     = m_objInstance[i].objIndex;
     rayInst.hitGroupId = 0;
-    //rayInst.flags      = VK_GEOMETRY_INSTANCE_FORCE_OPAQUE_BIT_KHR;
     rayInst.flags      = VK_GEOMETRY_INSTANCE_TRIANGLE_FACING_CULL_DISABLE_BIT_KHR;
     tlas.emplace_back(rayInst);
   	
@@ -762,7 +761,7 @@ void HelloVulkan::CreateRtPipeline()
 
   vk::ShaderModule raygenSM =
       nvvk::createShaderModule(m_device,  //
-                               nvh::loadFile("shaders/pathtrace.rgen.spv", true, paths));
+                               nvh::loadFile("shaders/raytrace.rgen.spv", true, paths));
   vk::ShaderModule missSM =
       nvvk::createShaderModule(m_device,  //
                                nvh::loadFile("shaders/raytrace.rmiss.spv", true, paths));
@@ -805,7 +804,7 @@ void HelloVulkan::CreateRtPipeline()
 
   //hit group 0
   vk::ShaderModule chitSM =
-      nvvk::createShaderModule(m_device, nvh::loadFile("shaders/pathtrace.rchit.spv", true, paths));
+      nvvk::createShaderModule(m_device, nvh::loadFile("shaders/raytrace.rchit.spv", true, paths));
   {
     vk::RayTracingShaderGroupCreateInfoKHR hg{
         vk::RayTracingShaderGroupTypeKHR::eTrianglesHitGroup,
@@ -825,7 +824,7 @@ void HelloVulkan::CreateRtPipeline()
 
   //hit group 1
   vk::ShaderModule chit2SM =
-      nvvk::createShaderModule(m_device, nvh::loadFile("shaders/raytrace2.rchit.spv", true, paths));
+      nvvk::createShaderModule(m_device, nvh::loadFile("shaders/raytraceIS.rchit.spv", true, paths));
   
   vk::ShaderModule rintSM =
       nvvk::createShaderModule(m_device, nvh::loadFile("shaders/raytrace.rint.spv", true, paths));
@@ -892,7 +891,8 @@ void HelloVulkan::CreateRtPipeline()
   m_device.destroy(rintSM);
 }
 
-void HelloVulkan::CreatePtPipeline(){
+void HelloVulkan::CreatePtPipeline()
+{
 
 	std::vector<std::string> paths = defaultSearchPaths;
 
@@ -901,7 +901,7 @@ void HelloVulkan::CreatePtPipeline(){
 			nvh::loadFile("shaders/pathtrace.rgen.spv", true, paths));
 	vk::ShaderModule missSM =
 		nvvk::createShaderModule(m_device,  //
-			nvh::loadFile("shaders/raytrace.rmiss.spv", true, paths));
+			nvh::loadFile("shaders/pathtrace.rmiss.spv", true, paths));
 
 	vk::ShaderModule shadowMissSM =
 		nvvk::createShaderModule(m_device,  //
@@ -920,7 +920,7 @@ void HelloVulkan::CreatePtPipeline(){
 
 	stages.push_back({ {}, vk::ShaderStageFlagBits::eRaygenKHR, raygenSM, "main" });
 	rg.setGeneralShader(static_cast<uint32_t>(stages.size() - 1));
-	mPtShaderGroups.push_back(rg);
+	mRtShaderGroups.push_back(rg);
 
 	//raymiss
 	vk::RayTracingShaderGroupCreateInfoKHR mg{
@@ -933,15 +933,15 @@ void HelloVulkan::CreatePtPipeline(){
 
 	stages.push_back({ {}, vk::ShaderStageFlagBits::eMissKHR, missSM, "main" });
 	mg.setGeneralShader(static_cast<uint32_t>(stages.size() - 1));
-	mPtShaderGroups.push_back(mg);
+	mRtShaderGroups.push_back(mg);
 
 	stages.push_back({ {}, vk::ShaderStageFlagBits::eMissKHR, shadowMissSM, "main" });
 	mg.setGeneralShader(static_cast<uint32_t>(stages.size() - 1));
-	mPtShaderGroups.push_back(mg);
+	mRtShaderGroups.push_back(mg);
 
 	//hit group 0
 	vk::ShaderModule chitSM =
-		nvvk::createShaderModule(m_device, nvh::loadFile("shaders/raytrace.rchit.spv", true, paths));
+		nvvk::createShaderModule(m_device, nvh::loadFile("shaders/pathtrace.rchit.spv", true, paths));
 	{
 		vk::RayTracingShaderGroupCreateInfoKHR hg{
 			vk::RayTracingShaderGroupTypeKHR::eTrianglesHitGroup,
@@ -953,7 +953,7 @@ void HelloVulkan::CreatePtPipeline(){
 
 		stages.push_back({ {}, vk::ShaderStageFlagBits::eClosestHitKHR, chitSM, "main" });
 		hg.setClosestHitShader(static_cast<uint32_t>(stages.size() - 1));
-		mPtShaderGroups.push_back(hg);
+		mRtShaderGroups.push_back(hg);
 	}
 
 
@@ -961,7 +961,7 @@ void HelloVulkan::CreatePtPipeline(){
 
 	//hit group 1
 	vk::ShaderModule chit2SM =
-		nvvk::createShaderModule(m_device, nvh::loadFile("shaders/raytrace2.rchit.spv", true, paths));
+		nvvk::createShaderModule(m_device, nvh::loadFile("shaders/pathtraceIS.rchit.spv", true, paths));
 
 	vk::ShaderModule rintSM =
 		nvvk::createShaderModule(m_device, nvh::loadFile("shaders/raytrace.rint.spv", true, paths));
@@ -981,22 +981,43 @@ void HelloVulkan::CreatePtPipeline(){
 		stages.push_back({ {}, vk::ShaderStageFlagBits::eIntersectionKHR, rintSM, "main" });
 		hg.setIntersectionShader(static_cast<uint32_t>(stages.size() - 1));
 
-		mPtShaderGroups.push_back(hg);
+		mRtShaderGroups.push_back(hg);
 
 	}
-	
+
+
+
+
+	vk::PipelineLayoutCreateInfo pipelineLayoutCreateInfo;
+
+	vk::PushConstantRange pushConstants{ vk::ShaderStageFlagBits::eRaygenKHR
+											| vk::ShaderStageFlagBits::eClosestHitKHR
+											| vk::ShaderStageFlagBits::eMissKHR,
+										0, sizeof(RtPushConstants) };
+
+
+	pipelineLayoutCreateInfo.setPushConstantRangeCount(1);
+	pipelineLayoutCreateInfo.setPPushConstantRanges(&pushConstants);
+
+	std::vector<vk::DescriptorSetLayout> rtDescrSetLayouts = { mRtDescriptorSetLayout,
+															  m_descSetLayout };
+
+	pipelineLayoutCreateInfo.setLayoutCount = (static_cast<uint32_t>(rtDescrSetLayouts.size()));
+	pipelineLayoutCreateInfo.setPSetLayouts(rtDescrSetLayouts.data());
+
+	mRtPipelineLayout = m_device.createPipelineLayout(pipelineLayoutCreateInfo);
 
 	vk::RayTracingPipelineCreateInfoKHR rayTracingPipelineCreateInfo;
 
 	rayTracingPipelineCreateInfo.setStageCount(static_cast<uint32_t>(stages.size()));
 	rayTracingPipelineCreateInfo.setPStages(stages.data());
 
-	rayTracingPipelineCreateInfo.setGroupCount(static_cast<uint32_t>(mPtShaderGroups.size()));
-	rayTracingPipelineCreateInfo.setPGroups(mPtShaderGroups.data());
+	rayTracingPipelineCreateInfo.setGroupCount(static_cast<uint32_t>(mRtShaderGroups.size()));
+	rayTracingPipelineCreateInfo.setPGroups(mRtShaderGroups.data());
 
 	rayTracingPipelineCreateInfo.setMaxRecursionDepth(2); //Ray Depth
 	rayTracingPipelineCreateInfo.setLayout(mRtPipelineLayout);
-	mPtPipeline = static_cast<const vk::Pipeline&>(
+	mRtPipeline = static_cast<const vk::Pipeline&>(
 		m_device.createRayTracingPipelineKHR({}, rayTracingPipelineCreateInfo));
 
 	m_device.destroy(raygenSM);
@@ -1005,8 +1026,6 @@ void HelloVulkan::CreatePtPipeline(){
 	m_device.destroy(chitSM);
 	m_device.destroy(chit2SM);
 	m_device.destroy(rintSM);
-
-	
 }
 
 void HelloVulkan::UpdateFrame(){
@@ -1174,7 +1193,7 @@ void HelloVulkan::Pathtrace(const vk::CommandBuffer& pCommandBuffer,
 	mRtPushConstants.lightIntensity = m_pushConstant.lightIntensity;
 	mRtPushConstants.lightType = m_pushConstant.lightType;
 
-	pCommandBuffer.bindPipeline(vk::PipelineBindPoint::eRayTracingKHR, mPtPipeline);
+	pCommandBuffer.bindPipeline(vk::PipelineBindPoint::eRayTracingKHR, mRtPipeline);
 	pCommandBuffer.bindDescriptorSets(vk::PipelineBindPoint::eRayTracingKHR, mRtPipelineLayout, 0,
 		{ mRtDescriptorSet, m_descSet }, {});
 
@@ -1191,7 +1210,7 @@ void HelloVulkan::Pathtrace(const vk::CommandBuffer& pCommandBuffer,
 
 
 
-	vk::DeviceSize sbtSize = progSize * static_cast<vk::DeviceSize>(mPtShaderGroups.size());
+	vk::DeviceSize sbtSize = progSize * static_cast<vk::DeviceSize>(mRtShaderGroups.size());
 
 	const vk::StridedBufferRegionKHR raygenShaderBindingTable = { mRtSBTBuffer.buffer, rayGenOffset,
 																 progSize, sbtSize };
@@ -1275,6 +1294,13 @@ const uint32_t noOfSpheres = 10;
   mat.specular = vec3f(0.1, 0.1, 0.1);
   mat.shininess = 0.f;
   materials.emplace_back(mat);
+
+////white shiny
+//mat.ambient = vec3f(0.0, 0.1, 0.0);
+//mat.diffuse = vec3f(1.f, 1.f, 1.f)*1.5f;
+//mat.specular = vec3f(1.f, 1.f, 1.f);
+//mat.shininess = 0.3f;
+//materials.emplace_back(mat);
 
 	//metallic
   mat.ambient = vec3f(0.008, 0.008, 0.008);

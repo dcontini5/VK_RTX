@@ -17,7 +17,7 @@ struct MaterialObj
   nvmath::vec3f diffuse       = nvmath::vec3f(0.7f, 0.7f, 0.7f);
   nvmath::vec3f specular      = nvmath::vec3f(1.0f, 1.0f, 1.0f);
   nvmath::vec3f transmittance = nvmath::vec3f(0.0f, 0.0f, 0.0f);
-  nvmath::vec3f emission      = nvmath::vec3f(0.0f, 0.0f, 0.0f);
+  nvmath::vec3f emission      = nvmath::vec3f(0.0f, 0.0f, 0.1f);
   float         shininess     = 0.f;
   float         ior           = 1.0f;  // index of refraction
   float         dissolve      = 1.f;   // 1 == opaque; 0 == fully transparent

@@ -21,6 +21,7 @@ layout(binding = 3, set = 1) uniform sampler2D textureSamplers[];
 layout(binding = 4, set = 1)  buffer MatIndexColorBuffer { int i[]; } matIndex[];
 layout(binding = 5, set = 1, scalar) buffer Vertices { Vertex v[]; } vertices[];
 layout(binding = 6, set = 1) buffer Indices { uint i[]; } indices[];
+layout(binding = 7, set = 1, scalar) buffer allSpheres_ {Sphere i[];} allSpheres;
 
 // clang-format on
 
@@ -45,54 +46,44 @@ pushC;
 
 void main()
 {
-  // Object of this instance
-  uint objId = scnDesc.i[gl_InstanceID].objId;
+  vec3 worldPos = gl_WorldRayOriginEXT + gl_WorldRayDirectionEXT * gl_HitTEXT;
 
-  // Indices of the triangle
-  ivec3 ind = ivec3(indices[nonuniformEXT(objId)].i[3 * gl_PrimitiveID + 0],   //
-                    indices[nonuniformEXT(objId)].i[3 * gl_PrimitiveID + 1],   //
-                    indices[nonuniformEXT(objId)].i[3 * gl_PrimitiveID + 2]);  //
-  // Vertex of the triangle
-  Vertex v0 = vertices[nonuniformEXT(objId)].v[ind.x];
-  Vertex v1 = vertices[nonuniformEXT(objId)].v[ind.y];
-  Vertex v2 = vertices[nonuniformEXT(objId)].v[ind.z];
-
-  const vec3 barycentrics = vec3(1.0 - attribs.x - attribs.y, attribs.x, attribs.y);
+  Sphere instance = allSpheres.i[gl_PrimitiveID];
 
   // Computing the normal at hit position
-  vec3 normal = v0.nrm * barycentrics.x + v1.nrm * barycentrics.y + v2.nrm * barycentrics.z;
-  // Transforming the normal to world space
-  normal = normalize(vec3(scnDesc.i[gl_InstanceID].transfoIT * vec4(normal, 0.0)));
+  vec3 normal = normalize(worldPos - instance.center);
 
-
-  // Computing the coordinates of the hit position
-  vec3 worldPos = v0.pos * barycentrics.x + v1.pos * barycentrics.y + v2.pos * barycentrics.z;
-  // Transforming the position to world space
-  worldPos = vec3(scnDesc.i[gl_InstanceID].transfo * vec4(worldPos, 1.0));
+  // Computing the normal for a cube
+  if(gl_HitKindEXT == KIND_CUBE)  // Aabb
+  {
+    vec3  absN = abs(normal);
+    float maxC = max(max(absN.x, absN.y), absN.z);
+    normal     = (maxC == absN.x) ?
+                 vec3(sign(normal.x), 0, 0) :
+                 (maxC == absN.y) ? vec3(0, sign(normal.y), 0) : vec3(0, 0, sign(normal.z));
+  }
 
   
   vec3 lDir      = pushC.lightPosition - worldPos;
   float lightDistance  = length(lDir);
   float lightIntensity = pushC.lightIntensity / (lightDistance * lightDistance);
   vec3 L              = normalize(lDir);
-  
- 
 
   // Material of the object
-  int               matIdx = matIndex[nonuniformEXT(objId)].i[gl_PrimitiveID];
-  WaveFrontMaterial mat    = materials[nonuniformEXT(objId)].m[matIdx];
-
-    
+  int               matIdx = matIndex[nonuniformEXT(gl_InstanceID)].i[gl_PrimitiveID];
+  WaveFrontMaterial mat    = materials[nonuniformEXT(gl_InstanceID)].m[matIdx];
+  
   if(mat.illum == 2 || mat.illum == 3){
 	mat.specular = vec3(1);
-	mat.diffuse = vec3(0.01);
+	mat.diffuse = vec3(0.1);
 	mat.shininess = 100.0;
-	
   }
 
   // Diffuse
   vec3  diffuse     = computeDiffuse(mat, L, normal);
   vec3  specular    = vec3(0);
+
+  
   float attenuation = 1.0;
   float minAtt = 0.3;
   
@@ -108,6 +99,8 @@ void main()
   // Tracing shadow ray only if the light is visible from the surface
   if(dot(normal, L) > 0)
   {
+
+	
 
 	float tMin   = 0.001;
 	float tMax   = lightDistance;
@@ -143,22 +136,21 @@ void main()
 		
 	
   }
-
-
   float cosTheta = 1;
   float p = 1;
 
    if(mat.illum == 2) {
   
 	vec3 origin = worldPos;
-
+	
 	vec3 rayDir = refract(gl_WorldRayDirectionEXT, normal, mat.ior);
 	createCoordinateSystem(rayDir, tangent, bitangent);
 	prd.attenuation *= vec3(0.7f);
 	prd.done = 0;
 	prd.rayOrigin = origin;
-	//prd.rayDir = samplingPhongDistribution(prd.seed, pushC.sphereGlossiness, tangent, bitangent, rayDir, p, cosTheta);
-	prd.rayDir = rayDir;
+	prd.rayDir = samplingPhongDistribution(prd.seed, pushC.sphereGlossiness, tangent, bitangent, rayDir, p, cosTheta);
+	//prd.rayDir = rayDir;
+	
 
   }
  
@@ -167,16 +159,16 @@ void main()
 	vec3 origin = worldPos;
 	vec3 rayDir = reflect(gl_WorldRayDirectionEXT, normal);
 	createCoordinateSystem(rayDir, tangent, bitangent);
-	prd.attenuation *= vec3(0.7f);
+	prd.attenuation *= vec3(0.7f);;
 	prd.done = 0;
 	prd.rayOrigin = origin;
-	prd.rayDir = samplingPhongDistribution(prd.seed, pushC.mirrorGlossiness, tangent, bitangent, rayDir, p, cosTheta);
+	prd.rayDir = samplingPhongDistribution(prd.seed, pushC.sphereGlossiness, tangent, bitangent, rayDir, p, cosTheta);
 	//prd.rayDir = rayDir;
-
 
   }
  
 
  
   prd.hitValue = vec3(lightIntensity * attenuation * (diffuse + specular));// * cosTheta
+  
 }

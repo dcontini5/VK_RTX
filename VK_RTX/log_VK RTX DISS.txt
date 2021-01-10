@@ -7,7 +7,7 @@ Available Instance Layers :
 VK_LAYER_NV_optimus (v. 4020a0 1) : NVIDIA Optimus layer
 VK_LAYER_NV_nomad_release_public_2020_4_0 (v. 402083 1) : NVIDIA Nsight Graphics interception layer
 VK_LAYER_NV_GPU_Trace_release_public_2020_4_0 (v. 402083 1) : NVIDIA Nsight Graphics GPU Trace interception layer
-VK_LAYER_OW_OVERLAY (v. 401079 1) : Overwolf Overlay Layer
+VK_LAYER_OW_OVERLAY (v. 401083 1) : Overwolf Overlay Layer
 VK_LAYER_VALVE_steam_overlay (v. 402088 1) : Steam Overlay Layer
 VK_LAYER_VALVE_steam_fossilize (v. 402088 1) : Steam Pipeline Caching Layer
 VK_LAYER_OBS_HOOK (v. 402083 1) : Open Broadcaster Software hook

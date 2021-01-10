@@ -3,11 +3,22 @@ struct hitPayload
   vec3 hitValue;
   int depth;
   vec3 weight;
-  int done;
   vec3 rayOrigin;
   vec3 rayDir;
   uint seed;
 };
+
+struct RTHitPayload
+{
+	vec3 hitValue;
+	int depth;
+	vec3 attenuation;
+	int done;
+	vec3 rayOrigin;
+	vec3 rayDir;
+	uint seed;
+};
+
 
 struct Sphere
 {

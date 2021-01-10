@@ -106,9 +106,6 @@
     <None Include="..\shaders\raytrace.rmiss">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="..\shaders\raytrace2.rchit">
-      <Filter>Shaders</Filter>
-    </None>
     <None Include="..\shaders\raytraceShadow.rmiss">
       <Filter>Shaders</Filter>
     </None>

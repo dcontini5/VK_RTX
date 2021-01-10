@@ -41,21 +41,9 @@ float rnd(inout uint prev)
 //-------------------------------------------------------------------------------------------------
 
 // Randomly sampling around +Z
-vec3 samplingHemisphere(inout uint seed, in vec3 x, in vec3 y, in vec3 z)
-{
-#define M_PI 3.141592
 
-  float r1 = rnd(seed);
-  float r2 = rnd(seed);
-  float sq = sqrt(1.0 - r2);
 
-  vec3 direction = vec3(cos(2 * M_PI * r1) * sq, sin(2 * M_PI * r1) * sq, sqrt(r2));
-  direction      = direction.x * x + direction.y * y + direction.z * z;
-
-  return direction;
-}
-
-vec3 samplingHemisphere2(inout uint seed, in vec3 x, in vec3 y, in vec3 z, out float p)
+vec3 samplingHemisphere(inout uint seed, in vec3 x, in vec3 y, in vec3 z, out float p)
 {
 #define M_PI 3.141592
 
@@ -86,10 +74,9 @@ float calcMaxCosTheta(in vec3 N, in float L,  in vec3 T, in float R){
 
 }
 
-vec3 samplingCone(inout uint seed, in float maxCosTheta, in vec3 x, in vec3 y, in vec3 z, inout float p){
+vec3 samplingCone(inout uint seed, in float maxCosTheta, in vec3 x, in vec3 y, in vec3 z){
 	
 	
-
 	float r1 = rnd(seed);
 	float r2 = rnd(seed);
 
@@ -104,26 +91,26 @@ vec3 samplingCone(inout uint seed, in float maxCosTheta, in vec3 x, in vec3 y, i
 							
 	direction = direction.x * x + direction.y * y + direction.z * z;
 	
-	p = 1 / (2 * M_PI * (1 - maxCosTheta));
-
 	return direction;
 
 }
 
 
-vec3 samplingPhongDistribution(inout uint seed, in float exp, in vec3 x, in vec3 y, in vec3 z, inout float p, in vec3 N) {
+vec3 samplingPhongDistribution(inout uint seed, in float exp, in vec3 x, in vec3 y, in vec3 z, inout float p, inout float cosTheta) {
 	
 	float u0 = rnd(seed);
 	float u1 = rnd(seed);
 
-	float cosTheta = pow(1 - u0, 1/(1 + exp));
+	cosTheta = pow(1 - u0, 1/(1 + exp));
 	float sinTheta = sqrt(1 - cosTheta * cosTheta);
 	float phi = u1 * 2 * M_PI;
 
-	vec3 refDirection = vec3(cos(phi) * sinTheta,
+	vec3 refDirection = vec3(
+						cos(phi) * sinTheta,
 						sin(phi) * sinTheta,
 						cosTheta);
-	p = (exp + 1) / 2 * M_PI;
+
+	p = (exp + 1) / 2 * M_PI * pow(cosTheta, exp);
 
 	vec3 direction =  refDirection.x * x + refDirection.y * y + refDirection.z * z;
 	

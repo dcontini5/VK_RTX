@@ -125,7 +125,7 @@ public:
     nvmath::vec4f clearColor;
     nvmath::vec3f lightPosition;
     float         lightIntensity;
-	float		  areaLightRadius;
+	float		  areaLightRadius{0.01f};
     int           lightType;
     int           maxDepth{10};
 	int			  frame{-1};
