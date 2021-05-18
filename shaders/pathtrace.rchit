@@ -80,9 +80,9 @@ void main()
   vec3 tangent, bitangent;
   vec3 rayOrigin = worldPos;
  
-  float p = 1.0;
+  float p = 1.0 / M_PI;
   vec3  albedo    = mat.diffuse;
-  float cos_theta;
+  float cos_theta = 1.0;
 
   vec3 rayDirection = vec3(0);
   
@@ -112,7 +112,7 @@ void main()
 
   vec3 BRDF = albedo / M_PI;
 
-  if(mat.shininess > 0.0) BRDF = albedo * p;
+ // if(mat.shininess > 0.0) BRDF = albedo * p;
 
   prd.rayOrigin    = rayOrigin;
   prd.rayDir	   = rayDirection;

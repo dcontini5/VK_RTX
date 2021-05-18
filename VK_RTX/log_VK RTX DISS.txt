@@ -1,16 +1,20 @@
 _______________
 Vulkan Version:
- - available:  1.2.154
+ - available:  1.2.162
  - requesting: 1.2.0
 ___________________________
 Available Instance Layers :
 VK_LAYER_NV_optimus (v. 4020a0 1) : NVIDIA Optimus layer
 VK_LAYER_NV_nomad_release_public_2020_4_0 (v. 402083 1) : NVIDIA Nsight Graphics interception layer
 VK_LAYER_NV_GPU_Trace_release_public_2020_4_0 (v. 402083 1) : NVIDIA Nsight Graphics GPU Trace interception layer
+VK_LAYER_RENDERDOC_Capture (v. 402083 c) : Debugging capture layer for RenderDoc
 VK_LAYER_OW_OVERLAY (v. 401083 1) : Overwolf Overlay Layer
+VK_LAYER_OW_OBS_HOOK (v. 402083 1) : OWOBS hook
 VK_LAYER_VALVE_steam_overlay (v. 402088 1) : Steam Overlay Layer
 VK_LAYER_VALVE_steam_fossilize (v. 402088 1) : Steam Pipeline Caching Layer
 VK_LAYER_OBS_HOOK (v. 402083 1) : Open Broadcaster Software hook
+VK_LAYER_EOS_Overlay (v. 402088 1) : Vulkan overlay layer for Epic Online Services
+VK_LAYER_EOS_Overlay (v. 402088 1) : Vulkan overlay layer for Epic Online Services
 VK_LAYER_LUNARG_api_dump (v. 40208d 2) : LunarG API dump layer
 VK_LAYER_LUNARG_device_simulation (v. 40208d 1) : LunarG device simulation layer
 VK_LAYER_LUNARG_gfxreconstruct (v. 40208d 9001) : GFXReconstruct Capture Layer Version 0.9.1

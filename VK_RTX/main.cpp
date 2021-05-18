@@ -218,7 +218,7 @@ int main(int argc, char** argv)
 	//helloVk.loadModel(nvh::findFile("media/scenes/sphere.obj", defaultSearchPaths));
 	
 	//Multicolor Cube
-	 helloVk.loadModel(nvh::findFile("media/scenes/cube_multi.obj", defaultSearchPaths));
+	helloVk.loadModel(nvh::findFile("media/scenes/cube_multi.obj", defaultSearchPaths));
  	
 	
 	//Mirrors
@@ -236,24 +236,29 @@ int main(int argc, char** argv)
 	  * nvmath::scale_mat4(nvmath::vec3f(0.5f, 1.f, .5f)));
 
 	//White Wall
-	helloVk.loadModel(nvh::findFile("media/scenes/plane.obj", defaultSearchPaths),
-    nvmath::translation_mat4(nvmath::vec3f(-3.f, 0.1f, 0.f))
-	 * nvmath::rotation_mat4_z(3.14f * 1.5f)
-	 * nvmath::scale_mat4(nvmath::vec3f(0.2f, 1.f, .27f))
-	 );
+	//helloVk.loadModel(nvh::findFile("media/scenes/plane.obj", defaultSearchPaths),
+    //nvmath::translation_mat4(nvmath::vec3f(-3.f, 0.1f, 0.f))
+	// * nvmath::rotation_mat4_z(3.14f * 1.5f)
+	// * nvmath::scale_mat4(nvmath::vec3f(0.2f, 1.f, .27f))
+	// );
 	
 	//Roof
 	helloVk.loadModel(nvh::findFile("media/scenes/plane.obj", defaultSearchPaths),
 	   nvmath::translation_mat4(nvmath::vec3f(3.f, 4.06f, 1.0f))
 	  * nvmath::rotation_mat4_x(3.1415927f)
-	 // * nvmath::scale_mat4(nvmath::vec3f(0.05f, 1.f, .05f))
-	  * nvmath::scale_mat4(nvmath::vec3f(0.5f, 1.f, .5f))
+	  * nvmath::scale_mat4(nvmath::vec3f(0.05f, 1.f, .05f))
+	 // * nvmath::scale_mat4(nvmath::vec3f(0.5f, 1.f, .5f))
 	 );
 	
 	//Light
 	helloVk.loadModel(nvh::findFile("media/scenes/light.obj", defaultSearchPaths),
 	nvmath::translation_mat4(nvmath::vec3(3.f, 4.f, 1.f))
 	  * nvmath::scale_mat4(nvmath::vec3f(1.2f, 0.05f, 1.2f)));
+
+	//helloVk.loadModel(nvh::findFile("media/scenes/Donut.obj", defaultSearchPaths),
+	//	nvmath::translation_mat4(nvmath::vec3(0.f, 0.f, 0.f))
+	//	* nvmath::scale_mat4(nvmath::vec3f(2.0f, 2.0f, 2.0f)));
+
 	
   //using intersection shader
   helloVk.CreateSpheres();
@@ -314,7 +319,7 @@ int main(int argc, char** argv)
       ImGui::Text("Application average %.3f ms/frame (%.1f FPS)",
                   1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 	  
-      ImGui::Checkbox("Ray Tracer Mode", &useRayTracer);
+     // ImGui::Checkbox("Ray Tracer Mode", &useRayTracer);
       ImGui::Render();
     }
 

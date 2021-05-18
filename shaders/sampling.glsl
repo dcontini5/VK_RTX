@@ -110,7 +110,7 @@ vec3 samplingPhongDistribution(inout uint seed, in float exp, in vec3 x, in vec3
 						sin(phi) * sinTheta,
 						cosTheta);
 
-	p = (exp + 1) / 2 * M_PI * pow(cosTheta, exp);
+	//p = (exp + 1) / 2 * M_PI * pow(cosTheta, exp);
 
 	vec3 direction =  refDirection.x * x + refDirection.y * y + refDirection.z * z;
 	

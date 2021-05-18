@@ -74,7 +74,7 @@ void main()
   vec3 tangent, bitangent;
   vec3 rayOrigin = worldPos;
  
-  float p = 1.0;
+  float p = 1.0 / M_PI;
 
   vec3 rayDirection = gl_WorldRayDirectionEXT;
   
@@ -89,7 +89,8 @@ void main()
    // Compute the BRDF for this ray (assuming Lambertian reflection)
   // BRDF = Bidirectional Reflectance Distribution Function
 	 
-  float cos_theta;
+
+  float cos_theta = 1.0;
 
   if(mat.illum == 3){
   
@@ -114,7 +115,7 @@ void main()
   
   vec3 BRDF = albedo / M_PI;
 	
-  if(mat.shininess > 0) BRDF = albedo * p;
+  //if(mat.shininess > 0) BRDF = albedo * p;
 
 
   prd.rayOrigin    = rayOrigin;

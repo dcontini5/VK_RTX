@@ -1241,7 +1241,8 @@ const uint32_t noOfSpheres = 10;
 	
     for(uint32_t i = 0; i < noOfSpheres; i++)
   {
-		s.radius = 0.5f;
+    	
+		s.radius = .5f;
     	
 	if (i == noOfSpheres - 1) {
 			s.center = nvmath::vec3f(6.0, 1.5, 0.0);

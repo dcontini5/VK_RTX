@@ -132,7 +132,7 @@ void main()
 			if(isShadowed)
 	{
 			  
-	  attenuation = 0.5;
+	  attenuation = 1.0;
 	  
 	}
 	else
